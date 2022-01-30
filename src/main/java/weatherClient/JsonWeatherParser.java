@@ -6,6 +6,7 @@ import java.util.List;
 public class JsonWeatherParser {
 
     private String city;
+    List<Integer> cod;
     List<Double> temperature;
     List<Double>  windSpeed;
     List<Double>  windGust;

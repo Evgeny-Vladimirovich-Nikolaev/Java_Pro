@@ -32,7 +32,6 @@ public class WeatherClient {
         try {
             Path jsonPath = Paths.get("./src/main/resources/weatherClient/weather.json");
             Files.writeString(jsonPath, json, StandardOpenOption.CREATE, StandardOpenOption.WRITE);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
