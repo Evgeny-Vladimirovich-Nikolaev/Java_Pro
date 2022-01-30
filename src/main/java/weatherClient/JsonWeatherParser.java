@@ -31,7 +31,9 @@ public class JsonWeatherParser {
         List<Double>  speed = JsonPath.read(json, "$..wind.speed");
         speedWind = (int) Math.round(speed.get(0));
         List<Double>  gust = JsonPath.read(json, "$..wind.gust");
-        gustWind = (int) Math.round(gust.get(0));
+        if (gust.get(0) != null) {
+            gustWind = (int) Math.round(gust.get(0));
+        } else gustWind = speedWind;
     }
 
     private void writeReport() {
