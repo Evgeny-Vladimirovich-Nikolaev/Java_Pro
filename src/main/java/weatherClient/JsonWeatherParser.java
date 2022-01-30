@@ -9,14 +9,12 @@ public class JsonWeatherParser {
     List<Double> temperature;
     List<Double>  windSpeed;
     List<Double>  windGust;
-    List<Integer> windDirection;
 
     public JsonWeatherParser(String city, String json) {
         this.city = city;
         temperature = JsonPath.read(json, "$..main[*]");
         windSpeed = JsonPath.read(json, "$..wind.speed");
         windGust = JsonPath.read(json, "$..wind.gust");
-        windDirection = JsonPath.read(json, "$..wind.deg");
     }
 
     @Override
