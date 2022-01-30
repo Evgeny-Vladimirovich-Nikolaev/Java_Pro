@@ -49,7 +49,6 @@
 4.9 DAO на Spring JDBC
 
 *Модуль 5
-
 Spring Framework. Hibernate. REST API*
 
 5.1 Основы ORM, JPA, Hibernate.

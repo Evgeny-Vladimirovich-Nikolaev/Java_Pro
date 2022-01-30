@@ -4,7 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.net.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
 
 
@@ -30,10 +33,22 @@ public class WeatherClient {
         URLConnection urlConnection = url.openConnection();
         urlConnection.connect();
         Scanner scanner = new Scanner(urlConnection.getInputStream());
-        while (scanner.hasNextLine()) {
-            System.out.println(scanner.nextLine());
+        String json = scanner.nextLine();
+        System.out.println(json);
+        writeJson(json);
+    }
+
+    private static void writeJson(String json) {
+        try {
+            Path jsonPath = Paths.get("./src/main/resources/weather.json");
+            Files.writeString(jsonPath, json, StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+
+
 
 
 
