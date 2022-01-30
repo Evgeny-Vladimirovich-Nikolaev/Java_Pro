@@ -1,41 +1,63 @@
-package weatherClient;
-
 import com.jayway.jsonpath.JsonPath;
+import lombok.RequiredArgsConstructor;
+
 import java.util.List;
 
+@RequiredArgsConstructor
 public class JsonWeatherParser {
 
-    private String city;
-    List<Integer> cod;
-    List<Double> temperature;
-    List<Double>  windSpeed;
-    List<Double>  windGust;
+    private final String city;
+    private final String json;
+    private String report;
+    private int realTemperature;
+    private  int feelTemperature;
+    private  int speedWind;
+    private  int gustWind;
 
-    public JsonWeatherParser(String city, String json) {
-        this.city = city;
-        temperature = JsonPath.read(json, "$..main[*]");
-        windSpeed = JsonPath.read(json, "$..wind.speed");
-        windGust = JsonPath.read(json, "$..wind.gust");
+
+    public void parseWeather() {
+        parseTemperature();
+        parseWind();
+        writeReport();
+    }
+
+    private void parseTemperature() {
+        List<Double> temperature = JsonPath.read(json, "$..main[*]");
+        realTemperature = (int) Math.round(temperature.get(0));
+        feelTemperature = (int) Math.round(temperature.get(1));
+    }
+
+    private void parseWind() {
+        List<Double>  speed = JsonPath.read(json, "$..wind.speed");
+        speedWind = (int) Math.round(speed.get(0));
+        List<Double>  gust = JsonPath.read(json, "$..wind.gust");
+        gustWind = (int) Math.round(gust.get(0));
+    }
+
+    private void writeReport() {
+        StringBuilder sb = new StringBuilder("Погода в населённом пункте ");
+        sb.append(city);
+        sb.append("\nТемпература воздуха: ");
+        sb.append(realTemperature);
+        sb.append("\u00b0C");
+        if(feelTemperature != realTemperature){
+            sb.append(", ощущается как ");
+            sb.append(feelTemperature);
+            sb.append("\u00b0C");
+        }
+        sb.append("\nСкорость ветра: ");
+        sb.append(speedWind);
+        sb.append(" м/с");
+        if(gustWind != speedWind){
+            sb.append(" с порывами до ");
+            sb.append(gustWind);
+            sb.append(" м/с");
+        }
+        report = sb.toString();
     }
 
     @Override
     public String toString() {
-        StringBuilder report = new StringBuilder("Погода в населённом пункте ");
-        report.append(city);
-        report.append("\nТемпература воздуха: ");
-        report.append(temperature.get(0));
-        report.append("\u00b0C");
-        report.append(", ощущается как ");
-        report.append(temperature.get(1));
-        report.append("\u00b0C");
-        report.append("\nСкорость ветра: ");
-        report.append(windSpeed.get(0));
-        report.append(" м/с");
-        if(windGust.size() != 0){
-            report.append(" с порывами до ");
-            report.append(windGust.get(0));
-            report.append(" м/с");
-        }
-        return report.toString();
+        return report;
     }
 }

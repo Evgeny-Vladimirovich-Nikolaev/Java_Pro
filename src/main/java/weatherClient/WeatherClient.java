@@ -1,5 +1,3 @@
-import weatherClient.JsonWeatherParser;
-
 import java.io.IOException;
 import java.net.*;
 import java.nio.file.Files;
@@ -18,23 +16,20 @@ public class WeatherClient {
                 + "&appid="
                 + apiKey
                 + "&units=metric&lang=ru";
+        System.out.println(request);
+        String json = getJson(request);
+        JsonWeatherParser parser = new JsonWeatherParser(city, json);
+        parser.parseWeather();
+        System.out.println(parser);
+    }
+
+    private static String getJson(String request) throws URISyntaxException, IOException {
         URI uri = new URI(request);
         URL url = uri.toURL();
         URLConnection urlConnection = url.openConnection();
         urlConnection.connect();
         Scanner scanner = new Scanner(urlConnection.getInputStream());
-        String json = scanner.nextLine();
-        writeJson(json);
-        System.out.println(new JsonWeatherParser(city, json));
-    }
-
-    private static void writeJson(String json) {
-        try {
-            Path jsonPath = Paths.get("./src/main/resources/weatherClient/weather.json");
-            Files.writeString(jsonPath, json, StandardOpenOption.CREATE, StandardOpenOption.WRITE);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return scanner.nextLine();
     }
 
 }
