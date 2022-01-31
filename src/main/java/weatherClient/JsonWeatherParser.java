@@ -10,9 +10,9 @@ public class JsonWeatherParser {
     private final String json;
     private String report;
     private int realTemperature;
-    private  int feelTemperature;
-    private  int speedWind;
-    private  int gustWind;
+    private int feelTemperature;
+    private int speedWind;
+    private int gustWind;
 
 
     public void parseWeather() {
@@ -24,16 +24,24 @@ public class JsonWeatherParser {
     private void parseTemperature() {
         List<Double> temperature = JsonPath.read(json, "$..main[*]");
         realTemperature = (int) Math.round(temperature.get(0));
-        feelTemperature = (int) Math.round(temperature.get(1));
+        try{
+            feelTemperature = (int) Math.round(temperature.get(1));
+        }catch(Exception e) {
+            System.out.println(WeatherMessage.WEATHER_ERROR.getMsg());
+            feelTemperature = realTemperature;
+        }
     }
 
     private void parseWind() {
-        List<Double>  speed = JsonPath.read(json, "$..wind.speed");
+        List<Double> speed = JsonPath.read(json, "$..wind.speed");
         speedWind = (int) Math.round(speed.get(0));
-        List<Double>  gust = JsonPath.read(json, "$..wind.gust");
-        if (gust.get(0) != null) {
+        try {
+            List<Double> gust = JsonPath.read(json, "$..wind.gust");
             gustWind = (int) Math.round(gust.get(0));
-        } else gustWind = speedWind;
+        } catch(Exception e) {
+            System.out.println(WeatherMessage.WEATHER_ERROR.getMsg());
+            gustWind = speedWind;
+        }
     }
 
     private void writeReport() {
@@ -42,7 +50,7 @@ public class JsonWeatherParser {
         sb.append("\nТемпература воздуха: ");
         sb.append(realTemperature);
         sb.append("\u00b0C");
-        if(feelTemperature != realTemperature){
+        if (feelTemperature != realTemperature) {
             sb.append(", ощущается как ");
             sb.append(feelTemperature);
             sb.append("\u00b0C");
@@ -50,7 +58,7 @@ public class JsonWeatherParser {
         sb.append("\nСкорость ветра: ");
         sb.append(speedWind);
         sb.append(" м/с");
-        if(gustWind != speedWind){
+        if (gustWind != speedWind) {
             sb.append(" с порывами до ");
             sb.append(gustWind);
             sb.append(" м/с");
