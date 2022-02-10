@@ -1,9 +1,12 @@
+package utils;
+
+import lombok.experimental.UtilityClass;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 
+@UtilityClass
 public class ResourcesWriter {
-
-    private ResourcesWriter() {}
 
     public static synchronized void writeFile(String path, String text, boolean append) {
         try {

@@ -1,10 +1,13 @@
+package utils;
+
+import lombok.experimental.UtilityClass;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
+@UtilityClass
 public class ResourcesReader {
-
-    private ResourcesReader() {}
 
     private static InputStream getFileFromResourceAsStream(String fileName) {
         try {

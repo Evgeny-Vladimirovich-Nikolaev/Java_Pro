@@ -1,3 +1,6 @@
+import receiver.StringReceiver;
+import utils.ResourcesReader;
+
 import java.io.IOException;
 import java.net.*;
 import java.util.Scanner;
@@ -6,7 +9,7 @@ public class WeatherClient {
 
     public static void main(String[] args) throws URISyntaxException, IOException {
         System.out.println("Hello, Ubuntu!");
-        String city = new StringReceiver().receive(WeatherMessage.CITY.getMsg());
+        String city = StringReceiver.receive(WeatherMessage.CITY.getMsg());
         String apiKey = ResourcesReader.readText("weatherClient/apiKey.txt");
         String request = "https://api.openweathermap.org/data/2.5/weather?q="
                 + city
