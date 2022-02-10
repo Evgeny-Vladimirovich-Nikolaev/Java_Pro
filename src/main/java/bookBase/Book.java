@@ -1,4 +1,4 @@
-package bookBase.dto;
+package bookBase;
 
 import com.opencsv.bean.CsvBindByName;
 import lombok.AllArgsConstructor;

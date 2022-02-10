@@ -1,6 +1,6 @@
 package utils;
 
-import bookBase.dto.Book;
+import bookBase.Book;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import lombok.experimental.UtilityClass;
