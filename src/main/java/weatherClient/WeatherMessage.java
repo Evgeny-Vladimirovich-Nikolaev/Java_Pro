@@ -1,3 +1,5 @@
+package weatherClient;
+
 public enum WeatherMessage {
 
     CITY("Введите название населённого пункта"),
@@ -15,7 +17,7 @@ public enum WeatherMessage {
         this.msg = msg;
     }
 
-    String getMsg() {
+    public String getMsg() {
         return msg;
     }
 }

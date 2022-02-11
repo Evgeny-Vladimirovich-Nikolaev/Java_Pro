@@ -7,12 +7,13 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
-public class BookBase {
+public class BookBaseAdapter {
+
     private static final Properties DB_SETTINGS = new Properties();
 
     static {
         try {
-            DB_SETTINGS.load(BookBase.class.getResourceAsStream("/db/db.properties"));
+            DB_SETTINGS.load(BookBaseAdapter.class.getResourceAsStream("/db/db.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -139,5 +140,4 @@ public class BookBase {
                 DB_SETTINGS.getProperty("db.login"),
                 DB_SETTINGS.getProperty("db.password"));
     }
-
 }

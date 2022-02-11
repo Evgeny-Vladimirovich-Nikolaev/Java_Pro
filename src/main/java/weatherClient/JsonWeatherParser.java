@@ -1,3 +1,5 @@
+package weatherClient;
+
 import com.jayway.jsonpath.JsonPath;
 import lombok.RequiredArgsConstructor;
 
