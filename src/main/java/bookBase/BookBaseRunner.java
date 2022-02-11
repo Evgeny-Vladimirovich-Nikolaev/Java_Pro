@@ -1,5 +1,6 @@
 package bookBase;
 
+import receiver.ValueReceiver;
 import utils.CsvReader;
 
 import java.util.List;
@@ -10,6 +11,7 @@ public class BookBaseRunner {
         List<Book> books = (List<Book>) CsvReader.readAsList("/books/bookData.csv", Book.class, ';', true);
         new BookBaseAdapter().fillBase(books);
         new RequestRunner().startSearching();
-        new BookSearcher().searchBooks("title", "Сов");
+        ValueReceiver.closeReader();
     }
+
 }

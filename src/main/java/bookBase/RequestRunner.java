@@ -1,10 +1,9 @@
 package bookBase;
 
-import receiver.NumberReceiver;
-import receiver.StringReceiver;
+import lombok.SneakyThrows;
+import receiver.ValueReceiver;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
+import java.sql.SQLException;
 
 public class RequestRunner {
 
@@ -16,38 +15,35 @@ public class RequestRunner {
         } while(resume());
     }
 
-    private void selectCategory() throws Exception {
-        NumberReceiver receiver = new NumberReceiver(Message.SELECT_REQUEST.getMsg(), 0 , 3);
-        int choice = NumberReceiver.call();
+    private void selectCategory() {
+        String choice = ValueReceiver.receiveString(Message.SELECT_REQUEST.getMsg());
         switch(choice) {
-            case 1 -> createRequestByTitle();
-            case 2 -> createRequestByName();
-            case 3 -> createRequestByPrice();
+            case "1" -> createRequestByTitle();
+            case "2" -> createRequestByName();
+            case "3" -> createRequestByPrice();
         }
     }
 
-    private void createRequestByTitle() throws Exception {
-        StringReceiver receiver = new StringReceiver(Message.ENTER_TITLE.getMsg());
-        String bookName = receiver.call();
+    private void createRequestByTitle() {
+        String bookName = ValueReceiver.receiveString(Message.ENTER_TITLE.getMsg());
         searcher.searchBooks("title", bookName);
     }
 
-    private void createRequestByName() throws Exception {
-        StringReceiver receiver = new StringReceiver(Message.ENTER_NAME.getMsg());
-        String authorName = receiver.call();
+    private void createRequestByName() {
+        String authorName = ValueReceiver.receiveString(Message.ENTER_NAME.getMsg());
         searcher.searchBooks("author", authorName);
     }
 
     private void createRequestByPrice() {
-
+        String price = Integer.toString(ValueReceiver.receiveInt(Message.ENTER_PRICE.getMsg()));
+        searcher.searchBooks("price", price);
     }
 
     boolean resume() {
-//        String response = "";
-//        while (!"Y".equalsIgnoreCase(response) && !"N".equalsIgnoreCase(response)) {
-//            response = receiver.StringReceiver.receive(Message.EXIT_APP.getMsg());
-//        }
-//        return "N".equalsIgnoreCase(response);
-        return true;
+        String response = "";
+        while (!"Y".equalsIgnoreCase(response) && !"N".equalsIgnoreCase(response)) {
+            response = ValueReceiver.receiveString(Message.EXIT_APP.getMsg());
+        }
+        return "N".equalsIgnoreCase(response);
     }
 }
