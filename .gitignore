@@ -4,3 +4,4 @@
 *.iml
 *.gitignore
 *.properties
+docker-compose.yaml

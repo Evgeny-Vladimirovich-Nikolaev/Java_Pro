@@ -19,7 +19,7 @@ public class BookBaseAdapter {
         }
     }
 
-    public void fillBase(List<Book> books) {
+    public void fillBase(Set<Book> books) {
         dropBooksAndAuthorsIfExists();
         createBooksAndAuthors();
         for (Book book : books) {

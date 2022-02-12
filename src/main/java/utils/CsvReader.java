@@ -1,6 +1,5 @@
 package utils;
 
-import bookBase.Book;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import lombok.experimental.UtilityClass;
@@ -9,24 +8,24 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @UtilityClass
 public class CsvReader {
 
-    public static List<?> readAsList(String resourceName, Class clazz, char separator, boolean ignoreLeadSpace) {
+    public static <T> Set<T> readAsSet(String resourceName, Class<T> clazz, char separator, boolean ignoreLeadSpace) {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(CsvReader.class.getResourceAsStream(resourceName)))) {
-            CsvToBean<Book> csvToBean = new CsvToBeanBuilder(reader)
+            CsvToBean<T> csvToBean = new CsvToBeanBuilder(reader)
                     .withType(clazz)
                     .withSeparator(separator)
                     .withIgnoreLeadingWhiteSpace(ignoreLeadSpace)
                     .build();
-            return csvToBean.stream().collect(Collectors.toList());
+            return csvToBean.stream().collect(Collectors.toSet());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Collections.emptyList();
+        return Collections.emptySet();
     }
 
 }
