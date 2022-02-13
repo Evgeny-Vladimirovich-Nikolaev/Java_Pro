@@ -2,6 +2,7 @@ package ormBookBase.dto;
 
 import com.opencsv.bean.CsvBindByName;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,9 +14,13 @@ import java.math.BigDecimal;
 @Data
 @Entity
 @Table(name = "books")
+@NoArgsConstructor
 public class BookDto {
+    @Id
+    @Column(columnDefinition = "isbn")
+    private long longIsbn;
     @CsvBindByName(column = "ISBN")
-    private String isbn;
+    private String stringIsbn;
     @CsvBindByName(column = "Title")
     @Column(columnDefinition = "title")
     private String title;
@@ -31,10 +36,7 @@ public class BookDto {
     @Column(columnDefinition = "price")
     private BigDecimal price;
 
-    @Id
-    @Column(columnDefinition = "isbn")
-    public long convertIsbnToLong() {
-        //TODO
-        return 0;
+    public long getLongIsbn() {
+        return Long.parseLong(stringIsbn.replaceAll("[^0-9.]", ""));
     }
 }

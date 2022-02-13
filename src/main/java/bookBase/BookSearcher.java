@@ -43,7 +43,7 @@ public class BookSearcher {
             ResultSet resultSet = searchQuery.executeQuery();
             while(resultSet.next()) {
                   System.out.println(new Book(
-                        resultSet.getString("isbn"),
+                        resultSet.getString("stringIsbn"),
                         resultSet.getString("title"),
                         resultSet.getString("url"),
                         resultSet.getInt("pages"),
@@ -68,7 +68,7 @@ public class BookSearcher {
             ResultSet resultSet = searchQuery.executeQuery();
             while(resultSet.next()) {
                 System.out.println(new Book(
-                        resultSet.getString("isbn"),
+                        resultSet.getString("stringIsbn"),
                         resultSet.getString("title"),
                         resultSet.getString("url"),
                         resultSet.getInt("pages"),
@@ -93,7 +93,7 @@ public class BookSearcher {
             ResultSet resultSet = searchQuery.executeQuery();
             while(resultSet.next()) {
                 System.out.println(new Book(
-                        resultSet.getString("isbn"),
+                        resultSet.getString("stringIsbn"),
                         resultSet.getString("title"),
                         resultSet.getString("url"),
                         resultSet.getInt("pages"),

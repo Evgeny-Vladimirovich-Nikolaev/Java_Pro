@@ -16,8 +16,12 @@ public class AuthorDto {
     @Id
     @Column(columnDefinition = "id")
     private int id;
-    @CsvBindByName(column = "ISBN")
+    @CsvBindByName(column = "Author")
     @Column(columnDefinition = "name")
     private String name;
+
+    public String getName() {
+        return name != "" ? name : "без автора";
+    }
 
 }
