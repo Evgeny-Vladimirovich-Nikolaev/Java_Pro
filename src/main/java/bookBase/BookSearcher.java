@@ -35,15 +35,15 @@ public class BookSearcher {
                      """ 
                             select * from books
                             left join authors
-                            on books.author_id = authors.id 
-                            where books.title like ? 
+                            on books.author_id = authors.id
+                            where books.title like ?
                         """
              )) {
             searchQuery.setString(1, "%" + condition + "%");
             ResultSet resultSet = searchQuery.executeQuery();
             while(resultSet.next()) {
                   System.out.println(new Book(
-                        resultSet.getString("stringIsbn"),
+                        resultSet.getString("isbn"),
                         resultSet.getString("title"),
                         resultSet.getString("url"),
                         resultSet.getInt("pages"),
@@ -60,15 +60,15 @@ public class BookSearcher {
                      """ 
                             select * from authors
                             left join books
-                            on authors.id = books.author_id 
-                            where authors.name like ? 
+                            on authors.id = books.author_id
+                            where authors.name like ?
                         """
              )) {
             searchQuery.setString(1, "%" + condition + "%");
             ResultSet resultSet = searchQuery.executeQuery();
             while(resultSet.next()) {
                 System.out.println(new Book(
-                        resultSet.getString("stringIsbn"),
+                        resultSet.getString("isbn"),
                         resultSet.getString("title"),
                         resultSet.getString("url"),
                         resultSet.getInt("pages"),
@@ -85,15 +85,15 @@ public class BookSearcher {
                      """ 
                             select * from authors
                             left join books
-                            on authors.id = books.author_id 
-                            where price <= ? 
+                            on authors.id = books.author_id
+                            where price <= ?
                         """
              )) {
             searchQuery.setString(1, price);
             ResultSet resultSet = searchQuery.executeQuery();
             while(resultSet.next()) {
                 System.out.println(new Book(
-                        resultSet.getString("stringIsbn"),
+                        resultSet.getString("isbn"),
                         resultSet.getString("title"),
                         resultSet.getString("url"),
                         resultSet.getInt("pages"),
