@@ -12,10 +12,10 @@ import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Data
-@Entity
+@Entity(name = "books")
 @Table(name = "books")
 @NoArgsConstructor
-public class BookDto {
+public class Books {
     @Id
     @Column(columnDefinition = "isbn")
     private long longIsbn;

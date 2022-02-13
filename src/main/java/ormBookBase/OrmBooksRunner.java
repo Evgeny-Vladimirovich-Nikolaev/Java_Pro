@@ -1,7 +1,7 @@
 package ormBookBase;
 
-import ormBookBase.dto.AuthorDto;
-import ormBookBase.dto.BookDto;
+import ormBookBase.dto.Authors;
+import ormBookBase.dto.Books;
 import utils.CsvReader;
 
 import java.util.Set;
@@ -9,13 +9,13 @@ import java.util.Set;
 public class OrmBooksRunner {
 
     public static void main(String[] args) {
-        Set<BookDto> books = CsvReader.readAsSet("/books/bookData.csv", BookDto.class, ';', true);
-        for (BookDto book :books) {
+        Set<Books> books = CsvReader.readAsSet("/books/bookData.csv", Books.class, ';', true);
+        for (Books book :books) {
             System.out.println(book);
         }
-        Set<AuthorDto> authors = CsvReader.readAsSet("/books/bookData.csv", AuthorDto.class, ';', true);
+        Set<Authors> authors = CsvReader.readAsSet("/books/bookData.csv", Authors.class, ';', true);
         int id = 1;
-        for (AuthorDto author : authors) {
+        for (Authors author : authors) {
             author.setId(id++);
             System.out.println(author);
         }
