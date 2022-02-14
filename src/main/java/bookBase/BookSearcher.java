@@ -1,16 +1,17 @@
 package bookBase;
 
 import lombok.SneakyThrows;
-import receiver.ValueReceiver;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class BookSearcher {
 
     private static final Properties DB_SETTINGS = new Properties();
+    private List<Book> result = new ArrayList<>();
 
     static {
         try {
@@ -26,6 +27,7 @@ public class BookSearcher {
             case "author" -> searchByAuthor(condition);
             case "price" -> searchByPrice(condition);
         }
+        writeResponse();
     }
 
     @SneakyThrows
@@ -41,15 +43,7 @@ public class BookSearcher {
              )) {
             searchQuery.setString(1, "%" + condition + "%");
             ResultSet resultSet = searchQuery.executeQuery();
-            while(resultSet.next()) {
-                  System.out.println(new Book(
-                        resultSet.getString("isbn"),
-                        resultSet.getString("title"),
-                        resultSet.getString("url"),
-                        resultSet.getInt("pages"),
-                        resultSet.getString("name"),
-                        resultSet.getBigDecimal("price")));
-            }
+            collectResults(resultSet);
         }
     }
 
@@ -66,15 +60,7 @@ public class BookSearcher {
              )) {
             searchQuery.setString(1, "%" + condition + "%");
             ResultSet resultSet = searchQuery.executeQuery();
-            while(resultSet.next()) {
-                System.out.println(new Book(
-                        resultSet.getString("isbn"),
-                        resultSet.getString("title"),
-                        resultSet.getString("url"),
-                        resultSet.getInt("pages"),
-                        resultSet.getString("name"),
-                        resultSet.getBigDecimal("price")));
-            }
+            collectResults(resultSet);
         }
     }
 
@@ -91,15 +77,20 @@ public class BookSearcher {
              )) {
             searchQuery.setString(1, price);
             ResultSet resultSet = searchQuery.executeQuery();
-            while(resultSet.next()) {
-                System.out.println(new Book(
-                        resultSet.getString("isbn"),
-                        resultSet.getString("title"),
-                        resultSet.getString("url"),
-                        resultSet.getInt("pages"),
-                        resultSet.getString("name"),
-                        resultSet.getBigDecimal("price")));
-            }
+            collectResults(resultSet);
+        }
+    }
+
+    private void collectResults(ResultSet resultSet) throws SQLException {
+        result.clear();
+        while(resultSet.next()) {
+            result.add(new Book(
+                    resultSet.getString("isbn"),
+                    resultSet.getString("title"),
+                    resultSet.getString("url"),
+                    resultSet.getInt("pages"),
+                    resultSet.getString("name"),
+                    resultSet.getBigDecimal("price")));
         }
     }
 
@@ -108,5 +99,15 @@ public class BookSearcher {
                 DB_SETTINGS.getProperty("jdbc.url"),
                 DB_SETTINGS.getProperty("db.login"),
                 DB_SETTINGS.getProperty("db.password"));
+    }
+
+    private void writeResponse() {
+        if(!result.isEmpty()) {
+            for(Book book : result) {
+                System.out.println(book);
+            }
+        } else {
+            System.out.println("Ничего не найдено");
+        }
     }
 }
