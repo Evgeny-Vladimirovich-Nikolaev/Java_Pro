@@ -3,6 +3,7 @@ package utils;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import lombok.experimental.UtilityClass;
+import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,6 +17,7 @@ public class CsvReader {
 
     public static <T> Set<T> readAsSet(String resourceName, Class<T> clazz, char separator, boolean ignoreLeadSpace) {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(CsvReader.class.getResourceAsStream(resourceName)))) {
+
             CsvToBean<T> csvToBean = new CsvToBeanBuilder(reader)
                     .withType(clazz)
                     .withSeparator(separator)
