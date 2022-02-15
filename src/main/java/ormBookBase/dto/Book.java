@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Entity(name = "books")
 @Table(name = "books")
 @NoArgsConstructor
-public class Books {
+public class Book {
     @Id
     @Column(columnDefinition = "isbn")
     private long longIsbn;

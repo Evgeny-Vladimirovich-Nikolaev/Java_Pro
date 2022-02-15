@@ -1,5 +1,7 @@
 package weatherClient;
 
+import weatherClient.WeatherMessage;
+
 import com.jayway.jsonpath.JsonPath;
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +32,7 @@ public class JsonWeatherParser {
             List<Double> feelTemp = JsonPath.read(json, "$..main.feels_like");
             feelTemperature = (int) Math.round(feelTemp.get(0));
         }catch(Exception e) {
-            System.out.println(WeatherMessage.WEATHER_ERROR.getMsg());
+            System.out.println(WeatherMessage.TEMPERATURE_ERROR.getMsg());
         }
     }
 
@@ -41,7 +43,7 @@ public class JsonWeatherParser {
             List<Double> gust = JsonPath.read(json, "$..wind.gust");
             gustWind = (int) Math.round(gust.get(0));
         } catch(Exception e) {
-            System.out.println(WeatherMessage.WEATHER_ERROR.getMsg());
+            System.out.println(WeatherMessage.WIND_ERROR.getMsg());
         }
     }
 

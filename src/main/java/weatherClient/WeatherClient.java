@@ -20,18 +20,28 @@ public class WeatherClient {
                 + "&units=metric&lang=ru";
         System.out.println(request);
         String json = getJson(request);
-        JsonWeatherParser parser = new JsonWeatherParser(city, json);
-        parser.parseWeather();
-        System.out.println(parser);
+        if(json != null) {
+            JsonWeatherParser parser = new JsonWeatherParser(city, json);
+            parser.parseWeather();
+            System.out.println(parser);
+
+        }
     }
 
-    private static String getJson(String request) throws URISyntaxException, IOException {
-        URI uri = new URI(request);
-        URL url = uri.toURL();
-        URLConnection urlConnection = url.openConnection();
-        urlConnection.connect();
-        Scanner scanner = new Scanner(urlConnection.getInputStream());
-        return scanner.nextLine();
+    private static String getJson(String request)  {
+        try {
+            URI uri = new URI(request);
+            URL url = uri.toURL();
+            URLConnection urlConnection = url.openConnection();
+            urlConnection.connect();
+            Scanner scanner = new Scanner(urlConnection.getInputStream());
+            return scanner.nextLine();
+        } catch (URISyntaxException e) {
+            System.out.println("Не удалось обработать запрос");
+        } catch (IOException e) {
+            System.out.println("Ошибка соединения");
+        }
+        return null;
     }
 
 }
