@@ -2,6 +2,8 @@ package exchangeRate.aggregator;
 
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.PathNotFoundException;
+import exchangeRate.RateMessage;
 import exchangeRate.currency.Currency;
 import exchangeRate.currency.CurrencyImpl;
 import org.springframework.stereotype.Service;
@@ -24,7 +26,7 @@ public class RateAggregatorImpl implements RateAggregator {
             e.printStackTrace();
         }
     }
-    private Map<String, Currency> rate = new HashMap<>();
+    private final Map<String, Currency> rate = new HashMap<>();
 
     @Override
     public void clearCache() {
@@ -32,7 +34,7 @@ public class RateAggregatorImpl implements RateAggregator {
     }
 
     @Override
-    public Currency getCurrency(String code) throws IOException {
+    public Currency getCurrency(String code) {
         String c = code.toUpperCase();
         if (rate.containsKey(c)) {
             System.out.println("Результат будет получен из кэша");
@@ -43,20 +45,23 @@ public class RateAggregatorImpl implements RateAggregator {
     }
 
     public Currency parseCurrency(String code) {
-        DocumentContext source = null;
+        DocumentContext source;
+        Currency newItem = null;
         try {
             source = JsonPath.parse(url);
+            newItem = new CurrencyImpl(
+                    (source.read(String.format("$['Valute']['%s']['CharCode']", code))),
+                    (source.read(String.format("$['Valute']['%s']['Nominal']", code))),
+                    (source.read(String.format("$['Valute']['%s']['Name']", code))),
+                    (source.read(String.format("$['Valute']['%s']['Value']", code))),
+                    (source.read(String.format("$['Valute']['%s']['Previous']", code)))
+            );
+            rate.put(code, newItem);
+        } catch (PathNotFoundException e) {
+            System.out.println(RateMessage.ERROR_CODE.getMsg());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(RateMessage.ERROR_IO.getMsg());
         }
-        Currency newItem = new CurrencyImpl(
-                (source.read(String.format("$['Valute']['%s']['CharCode']", code))),
-                (source.read(String.format("$['Valute']['%s']['Nominal']", code))),
-                (source.read(String.format("$['Valute']['%s']['Name']", code))),
-                (source.read(String.format("$['Valute']['%s']['Value']", code))),
-                (source.read(String.format("$['Valute']['%s']['Previous']", code)))
-        );
-        rate.put(code, newItem);
         return newItem;
     }
 }

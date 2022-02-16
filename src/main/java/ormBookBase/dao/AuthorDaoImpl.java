@@ -24,7 +24,7 @@ public class AuthorDaoImpl implements AuthorDao {
         }
     }
 
-    public class AuthorsDAO {
+
         public Author findAuthorById(long id) {
             try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
                 Transaction transaction = session.beginTransaction();
@@ -63,4 +63,3 @@ public class AuthorDaoImpl implements AuthorDao {
             }
         }
     }
-}
