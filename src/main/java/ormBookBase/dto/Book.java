@@ -16,18 +16,18 @@ public class Book {
     @Id
     @Column(name = "isbn", nullable = false, unique = true)
     private final long longIsbn;
-    @Column
+    @Column(name = "title")
     private final String title;
-    @Column
+    @Column(name = "url")
     private final String url;
     @Column(name = "pages")
     private final Integer pageCount;
-    @Column
-    private int authors_id;
+    @Column(name = "author_id")
+    private int author_id;
     @ManyToOne
     @JoinColumn(name = "authors_id")
-    private Author authors;
-    @Column
+    private Author author;
+    @Column(name="price")
     private final Integer price;
 
 }

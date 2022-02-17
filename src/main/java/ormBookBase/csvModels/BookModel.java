@@ -3,6 +3,7 @@ package ormBookBase.csvModels;
 import com.opencsv.bean.CsvBindByName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ormBookBase.dto.Author;
 import ormBookBase.dto.Book;
 
 import java.math.BigDecimal;
@@ -28,11 +29,13 @@ public class BookModel {
     }
 
     public Book getBook() {
-        return new Book(
+        Book book =  new Book(
                 getLongIsbn(),
                 title,
                 url,
                 pageCount,
                 price);
+        book.setAuthor(new Author());
+        return book;
     }
 }

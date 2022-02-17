@@ -14,7 +14,12 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@ToString(exclude = "books")
+@ToString
+@jakarta.persistence.Table(indexes = {
+        @jakarta.persistence.Index(name = "idx_author_books", columnList = "books")
+}, uniqueConstraints = {
+        @jakarta.persistence.UniqueConstraint(name = "uc_author_books", columnNames = {"books"})
+})
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -25,9 +30,9 @@ public class Author {
     @Column()
     private int id;
     @CsvBindByName(column = "Author")
-    @Column(name = "author", unique = true)
+    @Column(name = "name", unique = true)
     private String name;
-    @OneToMany(mappedBy = "authors", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "author")
     private List<Book> books = new ArrayList<>();
 
     public String getName() {

@@ -5,14 +5,14 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class CurrencyImpl implements Currency {
 
-    private String CharCode;
-    private Integer Nominal;
-    private String Name;
-    private Double Value;
-    private Double Previous;
+    private String charCode;
+    private Integer nominal;
+    private String name;
+    private Double value;
+    private Double previous;
 
     public String getChanges() {
-        double changes = Value - Previous;
+        double changes = value - previous;
         if(changes <= 0.0) {
             return String.format("%.2f",changes);
         }
@@ -28,10 +28,10 @@ public class CurrencyImpl implements Currency {
                 Курс в рублях: %s
                 Изменение курса в рублях: %s
                 """,
-                CharCode,
-                Name,
-                Nominal,
-                Value,
+                charCode,
+                name,
+                nominal,
+                value,
                 getChanges());
     }
 
