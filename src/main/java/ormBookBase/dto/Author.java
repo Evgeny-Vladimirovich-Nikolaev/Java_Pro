@@ -1,15 +1,22 @@
 package ormBookBase.dto;
 
 import com.opencsv.bean.CsvBindByName;
+import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString(exclude = "books")
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(schema = "db", name = "authors")
 public class Author {

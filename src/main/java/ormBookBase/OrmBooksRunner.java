@@ -35,7 +35,6 @@ public class OrmBooksRunner {
 
         authorDao.addAuthors(authors.stream().toList());
 
-        //new BookBaseOrmAdapter(books, authors).restartTables("books");
     }
 
 }

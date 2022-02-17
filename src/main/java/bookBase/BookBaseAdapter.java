@@ -91,6 +91,8 @@ public class BookBaseAdapter {
             while (resultSet.next()) {
                 return Optional.of(resultSet.getInt("id"));
             }
+        } catch (SQLIntegrityConstraintViolationException e) {
+            System.out.println(e);
         }
         return Optional.empty();
     }
