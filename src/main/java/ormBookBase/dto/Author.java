@@ -17,11 +17,11 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@jakarta.persistence.Table(indexes = {
-        @jakarta.persistence.Index(name = "idx_author_books", columnList = "books")
-}, uniqueConstraints = {
-        @jakarta.persistence.UniqueConstraint(name = "uc_author_books", columnNames = {"books"})
-})
+//@jakarta.persistence.Table(indexes = {
+//        @jakarta.persistence.Index(name = "idx_author_books", columnList = "books")
+//}, uniqueConstraints = {
+//        @jakarta.persistence.UniqueConstraint(name = "uc_author_books", columnNames = {"books"})
+//})
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

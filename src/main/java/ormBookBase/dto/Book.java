@@ -20,7 +20,7 @@ public class Book {
     private String url;
     @Column(name = "pages")
     private Integer pageCount;
-    @Column(name = "author_id")
+    @Column(name = "author_id",updatable = false, insertable = false)
     private int author_id;
     @Column(name="price")
     private Integer price;
