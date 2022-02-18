@@ -5,7 +5,7 @@ import utils.CsvReader;
 
 import java.util.Set;
 
-public class BookBaseRunner {
+public class  BookBaseRunner {
 
     public static void main(String[] args) throws Exception {
         Set<Book> books = CsvReader.readAsSet("/books/bookData.csv", Book.class, ';', true);

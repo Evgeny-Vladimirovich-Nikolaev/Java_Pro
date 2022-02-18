@@ -23,15 +23,14 @@ public class CurrencyImpl implements Currency {
     public String toString() {
         return String.format(
                 """
-                Валюта: %s (%s)
-                Номинал: %s
-                Курс в рублях: %s
+                Код валюты: %s
+                Курс в рублях: %s за %s %s
                 Изменение курса в рублях: %s
                 """,
                 charCode,
-                name,
+                String.format("%.2f",value),
                 nominal,
-                value,
+                name,
                 getChanges());
     }
 
