@@ -1,5 +1,7 @@
 package ormBookBase.dto;
 
+import ormBookBase.dto.Book;
+
 import com.opencsv.bean.CsvBindByName;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -27,7 +29,7 @@ import java.util.Objects;
 public class Author {
 
     @Id
-    @Column()
+    @Column(name = "id", unique = true)
     private int id;
     @CsvBindByName(column = "Author")
     @Column(name = "name", unique = true)

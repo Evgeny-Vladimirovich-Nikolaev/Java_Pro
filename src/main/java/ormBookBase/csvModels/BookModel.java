@@ -29,13 +29,12 @@ public class BookModel {
     }
 
     public Book getBook() {
-        Book book =  new Book(
-                getLongIsbn(),
-                title,
-                url,
-                pageCount,
-                price);
-        book.setAuthor(new Author());
+        Book book =  new Book();
+        book.setLongIsbn(getLongIsbn());
+        book.setTitle(title);
+        book.setUrl(url);
+        book.setPageCount(pageCount);
+        book.setPrice(price);
         return book;
     }
 }

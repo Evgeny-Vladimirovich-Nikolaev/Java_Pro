@@ -5,3 +5,5 @@
 *.gitignore
 *.properties
 docker-compose.yaml
+hibernate.cfg.xml
+*.properties

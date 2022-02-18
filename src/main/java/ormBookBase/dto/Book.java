@@ -1,33 +1,31 @@
 package ormBookBase.dto;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-import java.math.BigDecimal;
-
+@NoArgsConstructor
 @Data
-@RequiredArgsConstructor
 @Entity
 @Table(schema = "db", name = "books")
 public class Book {
 
     @Id
     @Column(name = "isbn", nullable = false, unique = true)
-    private final long longIsbn;
+    private long longIsbn;
     @Column(name = "title")
-    private final String title;
+    private String title;
     @Column(name = "url")
-    private final String url;
+    private String url;
     @Column(name = "pages")
-    private final Integer pageCount;
+    private Integer pageCount;
     @Column(name = "author_id")
     private int author_id;
-    @ManyToOne
-    @JoinColumn(name = "authors_id")
-    private Author author;
     @Column(name="price")
-    private final Integer price;
+    private Integer price;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Author author;
 
 }
