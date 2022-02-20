@@ -56,6 +56,7 @@ public class BookDaoImpl implements BookDao {
                 Author author = authorQuery.getSingleResult();
                 for(Book book : books) {
                     book.setAuthor(author);
+                    book.setAuthorName(author.getName());
                 }
             }transaction.commit();
             return books;
@@ -72,11 +73,13 @@ public class BookDaoImpl implements BookDao {
             int id = author.getId();
             Query<Book> bookQuery = session.createQuery("FROM Book WHERE author_id = :id", Book.class);
             bookQuery.setParameter("id", id);
-            List<Book> books = bookQuery.list();
+            List<Book> books = bookQuery.getResultList();
+            transaction.commit();
             for (Book book : books) {
                 book.setAuthor(author);
+                book.setAuthor_id(id);
+                book.setAuthorName(author.getName());
             }
-            transaction.commit();
             return books;
         }
     }
@@ -95,6 +98,7 @@ public class BookDaoImpl implements BookDao {
                 Author author = authorQuery.getSingleResult();
                 for(Book book : books) {
                     book.setAuthor(author);
+                    book.setAuthorName(author.getName());
                 }
             }
             transaction.commit();

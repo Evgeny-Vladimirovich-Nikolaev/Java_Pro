@@ -20,8 +20,8 @@ import java.util.Objects;
 public class Author {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Column(name = "id", unique = true)
+    @GeneratedValue
+    @Column(name = "id", unique = true)
     private int id;
     @CsvBindByName(column = "Author")
     @Column(name = "name", unique = true)
@@ -35,7 +35,7 @@ public class Author {
 
     @Override
     public String toString() {
-        return name;
+        return "[name=" + name + ", id=" + id +"]";
     }
 
 }

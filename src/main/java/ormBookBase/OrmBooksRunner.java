@@ -38,8 +38,10 @@ public class OrmBooksRunner {
         List<Book> books = new ArrayList<>();
         for (BookModel model : models) {
             Book book = model.getBook();
-            Author author = authorDao.findAuthorByBName(model.getAuthor());
+            Author author = authorDao.findAuthorByBName(book.getAuthorName());
             book.setAuthor(author);
+            book.setAuthor_id(author.getId());
+            book.setAuthorName(author.getName());
             books.add(book);
         }
         bookDao.addBooks(books);

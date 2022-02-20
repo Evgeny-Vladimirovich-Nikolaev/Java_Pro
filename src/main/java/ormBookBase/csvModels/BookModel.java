@@ -35,6 +35,7 @@ public class BookModel {
         book.setUrl(url);
         book.setPageCount(pageCount);
         book.setPrice(price);
+        book.setAuthorName(author);
         return book;
     }
 }

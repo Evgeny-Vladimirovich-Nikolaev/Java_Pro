@@ -44,9 +44,9 @@ public class AuthorDaoImpl implements AuthorDao {
         try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
             Transaction transaction = session.beginTransaction();
             String hql = "FROM Author WHERE name like :n";
-            Query query = session.createQuery(hql);
+            Query<Author> query = session.createQuery(hql, Author.class);
             query.setParameter("n", "%" + name + "%");
-            Author author = (Author) query.getSingleResult();
+            Author author = query.getSingleResult();
             transaction.commit();
             return author;
         }
