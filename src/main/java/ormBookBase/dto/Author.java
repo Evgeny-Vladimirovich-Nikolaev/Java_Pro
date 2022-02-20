@@ -1,13 +1,10 @@
 package ormBookBase.dto;
 
-import ormBookBase.dto.Book;
-
 import com.opencsv.bean.CsvBindByName;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,12 +13,6 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@ToString
-//@jakarta.persistence.Table(indexes = {
-//        @jakarta.persistence.Index(name = "idx_author_books", columnList = "books")
-//}, uniqueConstraints = {
-//        @jakarta.persistence.UniqueConstraint(name = "uc_author_books", columnNames = {"books"})
-//})
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -29,7 +20,8 @@ import java.util.Objects;
 public class Author {
 
     @Id
-    @Column(name = "id", unique = true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@Column(name = "id", unique = true)
     private int id;
     @CsvBindByName(column = "Author")
     @Column(name = "name", unique = true)
@@ -39,6 +31,11 @@ public class Author {
 
     public String getName() {
         return !Objects.equals(name, "") ? name : "без автора";
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
 }

@@ -1,10 +1,16 @@
-package bookBase;
+package ormBookBase;
 
+import bookBase.Message;
+import ormBookBase.dao.BookDao;
+import ormBookBase.dao.BookDaoImpl;
+import ormBookBase.dto.Book;
 import receiver.ValueReceiver;
 
-public class RequestRunner {
+import java.util.List;
 
-    bookBase.BookSearcher searcher = new BookSearcher();
+public class Controller {
+
+    private final BookDao bookDao = new BookDaoImpl();
 
     public void startSearching() {
         do {
@@ -23,17 +29,26 @@ public class RequestRunner {
 
     private void createRequestByTitle() {
         String bookName = ValueReceiver.receiveString(Message.ENTER_TITLE.getMsg());
-        searcher.searchBooks("title", bookName);
+        List<Book> results = bookDao.searchByTitle(bookName);
+        for (Book book : results) {
+            System.out.println(book);
+        }
     }
 
     private void createRequestByName() {
         String authorName = ValueReceiver.receiveString(Message.ENTER_NAME.getMsg());
-        searcher.searchBooks("author", authorName);
+        List<Book> results = bookDao.searchByAuthor(authorName);
+        for (Book book : results) {
+            System.out.println(book);
+        }
     }
 
     private void createRequestByPrice() {
-        String price = Integer.toString(ValueReceiver.receiveInt(Message.ENTER_PRICE.getMsg()));
-        searcher.searchBooks("price", price);
+        int price = ValueReceiver.receiveInt(Message.ENTER_PRICE.getMsg());
+        List<Book> results = bookDao.searchByPrice(price);
+        for (Book book : results) {
+            System.out.println(book);
+        }
     }
 
     boolean resume() {
