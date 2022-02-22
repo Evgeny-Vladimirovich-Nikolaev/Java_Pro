@@ -20,7 +20,7 @@ import java.util.Objects;
 public class Author {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id", unique = true)
     private int id;
     @CsvBindByName(column = "Author")

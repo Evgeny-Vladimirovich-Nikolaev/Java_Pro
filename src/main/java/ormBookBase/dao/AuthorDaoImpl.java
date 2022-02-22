@@ -46,18 +46,21 @@ public class AuthorDaoImpl implements AuthorDao {
             String hql = "FROM Author WHERE name like :n";
             Query<Author> query = session.createQuery(hql, Author.class);
             query.setParameter("n", "%" + name + "%");
-            Author author = query.getSingleResult();
+            List<Author> authors = query.getResultList();
             transaction.commit();
-            return author;
+            return authors.get(0);
         }
     }
 
     @Override
     public Author findById(int id) throws NoResultException {
         try(Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
+            Transaction transaction = session.beginTransaction();
             Query<Author> fromAuthors = session.createQuery("FROM Author WHERE id = :id");
             fromAuthors.setParameter("id", id);
-            return fromAuthors.getSingleResult();
+            List<Author> authors = fromAuthors.getResultList();
+            transaction.commit();
+            return authors.get(0);
         }
     }
 

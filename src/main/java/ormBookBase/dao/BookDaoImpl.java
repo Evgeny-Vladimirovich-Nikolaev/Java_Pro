@@ -49,13 +49,15 @@ public class BookDaoImpl implements BookDao {
             String hql = "FROM Book WHERE title like :t";
             Query query = session.createQuery(hql);
             query.setParameter("t", "%" + title + "%");
-            List<Book> books = query.list();
+            List<Book> books = query.getResultList();
             if (!books.isEmpty()) {
                 Query<Author> authorQuery = session.createQuery("FROM Author WHERE id = :id", Author.class);
                 authorQuery.setParameter("id", books.get(0).getAuthor_id());
-                Author author = authorQuery.getSingleResult();
+                Author author = authorQuery.getResultList().get(0);
                 for(Book book : books) {
                     book.setAuthor(author);
+                    System.out.println(author);
+                    System.out.println(author.getName());
                     book.setAuthorName(author.getName());
                 }
             }transaction.commit();
@@ -69,7 +71,8 @@ public class BookDaoImpl implements BookDao {
             Transaction transaction = session.beginTransaction();
             Query<Author> authorQuery = session.createQuery("FROM Author WHERE name LIKE :n", Author.class);
             authorQuery.setParameter("n", "%" + name + "%");
-            Author author = authorQuery.getSingleResult();
+            List<Author> authors = authorQuery.getResultList();
+            Author author = authors.get(0);
             int id = author.getId();
             Query<Book> bookQuery = session.createQuery("FROM Book WHERE author_id = :id", Book.class);
             bookQuery.setParameter("id", id);
