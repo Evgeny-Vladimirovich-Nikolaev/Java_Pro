@@ -17,9 +17,10 @@ public enum Message {
             """),
     ENTER_NAME("Введите полное имя или часть имени автора"),
     ENTER_PRICE("Укажите максимальную стоимость товара"),
-    EXIT_APP("Выйти из программы? ('y', 'n')");
+    EXIT_APP("Выйти из программы? ('y', 'n')"),
+    NO_RESULTS("Ничего не найдено");
 
-    private String msg;
+    private final String msg;
 
     Message(String msg) {
         this.msg = msg;

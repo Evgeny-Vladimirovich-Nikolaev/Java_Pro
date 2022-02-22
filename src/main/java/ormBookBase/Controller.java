@@ -20,35 +20,37 @@ public class Controller {
 
     private void selectCategory() {
         String choice = ValueReceiver.receiveString(Message.SELECT_REQUEST.getMsg());
+        List<Book> books;
         switch(choice) {
-            case "1" -> createRequestByTitle();
-            case "2" -> createRequestByName();
-            case "3" -> createRequestByPrice();
+            case "1" -> books = createRequestByTitle();
+            case "2" -> books = createRequestByName();
+            case "3" -> books = createRequestByPrice();
+            default -> {
+                return;
+            }
+        }
+        if (!books.isEmpty()) {
+            for(Book book : books) {
+                System.out.println(book);
+            }
+        } else {
+            System.out.println(Message.NO_RESULTS.getMsg());
         }
     }
 
-    private void createRequestByTitle() {
+    private List<Book> createRequestByTitle() {
         String bookName = ValueReceiver.receiveString(Message.ENTER_TITLE.getMsg());
-        List<Book> results = bookDao.searchByTitle(bookName);
-        for (Book book : results) {
-            System.out.println(book);
-        }
+        return bookDao.searchByTitle(bookName);
     }
 
-    private void createRequestByName() {
+    private List<Book> createRequestByName() {
         String authorName = ValueReceiver.receiveString(Message.ENTER_NAME.getMsg());
-        List<Book> results = bookDao.searchByAuthor(authorName);
-        for (Book book : results) {
-            System.out.println(book);
-        }
+        return bookDao.searchByAuthor(authorName);
     }
 
-    private void createRequestByPrice() {
+    private List<Book> createRequestByPrice() {
         int price = ValueReceiver.receiveInt(Message.ENTER_PRICE.getMsg());
-        List<Book> results = bookDao.searchByPrice(price);
-        for (Book book : results) {
-            System.out.println(book);
-        }
+        return bookDao.searchByPrice(price);
     }
 
     boolean resume() {

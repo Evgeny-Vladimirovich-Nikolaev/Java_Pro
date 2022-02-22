@@ -10,7 +10,6 @@ import ormBookBase.dto.Book;
 import receiver.ValueReceiver;
 import utils.CsvReader;
 
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import java.util.*;
 
@@ -18,7 +17,6 @@ public class OrmBooksRunner {
 
     private static final AuthorDao authorDao = new AuthorDaoImpl();
     private static final BookDao bookDao = new BookDaoImpl();
-    private static Map<String, Author> authorsMap = new HashMap<>();
 
     public static void main(String[] args) {
         saveAuthors();
@@ -29,10 +27,6 @@ public class OrmBooksRunner {
 
     private static void saveAuthors() {
         Set<Author> authors = CsvReader.readAsSet("/books/bookData.csv", Author.class, ';', true);
-        for (Author author : authors) {
-            authorsMap.put(author.getName(), author);
-            System.out.println(author);
-        }
         authorDao.addAuthors(authors.stream().toList());
     }
 

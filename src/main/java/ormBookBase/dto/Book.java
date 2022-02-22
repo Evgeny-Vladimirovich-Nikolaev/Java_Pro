@@ -24,6 +24,7 @@ public class Book {
     private int author_id;
     @Column(name="price")
     private Integer price;
+    @Transient
     private String authorName;
     @ManyToOne
     @JoinColumn(name = "author_id")

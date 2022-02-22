@@ -3,10 +3,7 @@ package ormBookBase.csvModels;
 import com.opencsv.bean.CsvBindByName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ormBookBase.dto.Author;
 import ormBookBase.dto.Book;
-
-import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
