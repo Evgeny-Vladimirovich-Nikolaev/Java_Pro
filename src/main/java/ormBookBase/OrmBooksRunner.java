@@ -1,10 +1,12 @@
 package ormBookBase;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Configuration;
+import ormBookBase.controller.Controller;
+import ormBookBase.controller.ControllerImpl;
 import ormBookBase.csvModels.BookModel;
 import ormBookBase.dao.AuthorDao;
-import ormBookBase.dao.AuthorDaoImpl;
 import ormBookBase.dao.BookDao;
-import ormBookBase.dao.BookDaoImpl;
 import ormBookBase.dto.Author;
 import ormBookBase.dto.Book;
 import receiver.ValueReceiver;
@@ -13,15 +15,18 @@ import utils.CsvReader;
 import javax.persistence.PersistenceException;
 import java.util.*;
 
+@Configuration
 public class OrmBooksRunner {
 
-    private static final AuthorDao authorDao = new AuthorDaoImpl();
-    private static final BookDao bookDao = new BookDaoImpl();
+    private static final AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext("ormBookBase");
+    private static final AuthorDao authorDao = appContext.getBean(AuthorDao.class);
+    private static final BookDao bookDao = appContext.getBean(BookDao.class);
 
     public static void main(String[] args) {
         saveAuthors();
         saveBooks();
-        new Controller().startSearching();
+        Controller controller = appContext.getBean(ControllerImpl.class, authorDao);
+        controller.startSearching();
         ValueReceiver.closeReader();
     }
 

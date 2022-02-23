@@ -1,4 +1,5 @@
 package ormBookBase.dao;
+import org.springframework.stereotype.Service;
 import ormBookBase.dto.Author;
 import ormBookBase.dto.Book;
 
@@ -9,6 +10,7 @@ import ormBookBase.booksUtils.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class BookDaoImpl implements BookDao {
 
     @Override

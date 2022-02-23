@@ -3,6 +3,7 @@ package ormBookBase.dao;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Service;
 import ormBookBase.booksUtils.HibernateUtil;
 import ormBookBase.dto.Author;
 
@@ -10,6 +11,7 @@ import ormBookBase.dto.Author;
 import javax.persistence.NoResultException;
 import java.util.List;
 
+@Service
 public class AuthorDaoImpl implements AuthorDao {
 
     @Override

@@ -1,17 +1,20 @@
-package ormBookBase;
+package ormBookBase.controller;
 
 import bookBase.Message;
+import lombok.RequiredArgsConstructor;
 import ormBookBase.dao.BookDao;
-import ormBookBase.dao.BookDaoImpl;
 import ormBookBase.dto.Book;
 import receiver.ValueReceiver;
 
 import java.util.List;
 
-public class Controller {
+@org.springframework.stereotype.Controller
+@RequiredArgsConstructor
+public class ControllerImpl implements Controller{
 
-    private final BookDao bookDao = new BookDaoImpl();
+    private final BookDao bookDao;
 
+    @Override
     public void startSearching() {
         do {
             selectCategory ();
@@ -53,7 +56,7 @@ public class Controller {
         return bookDao.searchByPrice(price);
     }
 
-    boolean resume() {
+    private boolean resume() {
         String response = "";
         while (!"Y".equalsIgnoreCase(response) && !"N".equalsIgnoreCase(response)) {
             response = ValueReceiver.receiveString(Message.EXIT_APP.getMsg());
