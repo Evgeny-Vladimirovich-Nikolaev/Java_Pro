@@ -1,4 +1,4 @@
-package ormBookBase.controller;
+package ormBookBase;
 
 
 import lombok.RequiredArgsConstructor;
@@ -25,6 +25,11 @@ public class UserInteraction {
     @Autowired
     public UserInteraction(BookDao bookDao) {
         this.bookDao = bookDao;
+    }
+
+    @ShellMethod(key = "hello-to", value = "Say hello to username")
+    public String helloTo(@ShellOption({"username", "u"}) String username) {
+        return username;
     }
 
     @ShellMethod(value = "Searching by title", key = {"title", "t"})

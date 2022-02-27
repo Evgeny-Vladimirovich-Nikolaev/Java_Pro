@@ -2,13 +2,17 @@ package ormBookBase;
 
 import bookBase.BookBaseRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import ormBookBase.controller.Controller;
 import ormBookBase.controller.ControllerImpl;
 import ormBookBase.csvModels.BookModel;
 import ormBookBase.dao.AuthorDao;
+import ormBookBase.dao.AuthorDaoImpl;
 import ormBookBase.dao.BookDao;
+import ormBookBase.dao.BookDaoImpl;
 import ormBookBase.dto.Author;
 import ormBookBase.dto.Book;
 import receiver.ValueReceiver;
@@ -27,11 +31,7 @@ public class OrmBooksRunner {
     public static void main(String[] args) {
         saveAuthors();
         saveBooks();
- //       Controller controller = appContext.getBean(ControllerImpl.class, authorDao);
-//        controller.startSearching();
-//        ValueReceiver.closeReader();
-
-        SpringApplication.run(BookBaseRunner.class, args);
+        ValueReceiver.closeReader();
     }
 
     private static void saveAuthors() {
