@@ -1,5 +1,7 @@
 package ormBookBase;
 
+import bookBase.BookBaseRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import ormBookBase.controller.Controller;
@@ -25,9 +27,11 @@ public class OrmBooksRunner {
     public static void main(String[] args) {
         saveAuthors();
         saveBooks();
-        Controller controller = appContext.getBean(ControllerImpl.class, authorDao);
-        controller.startSearching();
-        ValueReceiver.closeReader();
+ //       Controller controller = appContext.getBean(ControllerImpl.class, authorDao);
+//        controller.startSearching();
+//        ValueReceiver.closeReader();
+
+        SpringApplication.run(BookBaseRunner.class, args);
     }
 
     private static void saveAuthors() {
