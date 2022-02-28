@@ -16,14 +16,19 @@ public class BaseController {
 
     BookSearcher bookSearcher = new BookSearcher();
 
-    @ShellMethod(key = "hello-to", value = "Say hello to username")
-    public String helloTo(@ShellOption({"username", "u"}) String username) {
-        return username;
-    }
-
     @ShellMethod(value = "Searching by title", key = {"title", "t"})
     public void createRequestByTitle(@ShellOption({"-t, --title"}) String title) {
         bookSearcher.searchBooks("title", title);
+    }
+
+    @ShellMethod(value = "Searching by title", key = {"author", "a"})
+    public void createRequestByAuthor(@ShellOption({"-a, --author"}) String author) {
+        bookSearcher.searchBooks("author", author);
+    }
+
+    @ShellMethod(value = "Searching by title", key = {"price", "p"})
+    public void createRequestByPrice(@ShellOption({"-p, --price"}) String price) {
+        bookSearcher.searchBooks("price", price);
     }
 
 }
