@@ -26,6 +26,7 @@ public class BaseController {
         bookSearcher.searchBooks("author", author);
     }
 
+
     @ShellMethod(value = "Searching by title", key = {"price", "p"})
     public void createRequestByPrice(@ShellOption({"-p, --price"}) String price) {
         bookSearcher.searchBooks("price", price);
