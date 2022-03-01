@@ -31,6 +31,8 @@ public class OrmBooksRunner {
     public static void main(String[] args) {
         saveAuthors();
         saveBooks();
+        Controller controller = appContext.getBean(ControllerImpl.class, bookDao);
+        controller.startSearching();
         ValueReceiver.closeReader();
     }
 
