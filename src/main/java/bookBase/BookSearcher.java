@@ -23,17 +23,23 @@ public class BookSearcher {
         }
     }
 
-    public void searchBooks(String categorySearch, String condition) {
+    public List<Book> searchBooks(String categorySearch, String condition) {
         switch (categorySearch) {
-            case "title" -> searchByTitle(condition);
-            case "author" -> searchByAuthor(condition);
-            case "price" -> searchByPrice(condition);
+            case "title" -> {
+                return searchByTitle(condition);
+            }
+            case "author" -> {
+                return searchByAuthor(condition);
+            }
+            case "price" -> {
+                return searchByPrice(condition);
+            }
         }
-        writeResponse();
+        return null;
     }
 
     @SneakyThrows
-    private void searchByTitle(String condition) {
+    private List<Book> searchByTitle(String condition) {
         try (final Connection connection = getConnection();
              final PreparedStatement searchQuery = connection.prepareStatement(
                      """ 
@@ -45,12 +51,12 @@ public class BookSearcher {
              )) {
             searchQuery.setString(1, "%" + condition + "%");
             ResultSet resultSet = searchQuery.executeQuery();
-            collectResults(resultSet);
+            return collectResults(resultSet);
         }
     }
 
     @SneakyThrows
-    private void searchByAuthor(String condition) {
+    private List<Book> searchByAuthor(String condition) {
         try (final Connection connection = getConnection();
              final PreparedStatement searchQuery = connection.prepareStatement(
                      """ 
@@ -62,12 +68,12 @@ public class BookSearcher {
              )) {
             searchQuery.setString(1, "%" + condition + "%");
             ResultSet resultSet = searchQuery.executeQuery();
-            collectResults(resultSet);
+            return collectResults(resultSet);
         }
     }
 
     @SneakyThrows
-    public void searchByPrice(String price) {
+    public List<Book> searchByPrice(String price) {
         try (final Connection connection = getConnection();
              final PreparedStatement searchQuery = connection.prepareStatement(
                      """ 
@@ -79,12 +85,12 @@ public class BookSearcher {
              )) {
             searchQuery.setString(1, price);
             ResultSet resultSet = searchQuery.executeQuery();
-            collectResults(resultSet);
+            return collectResults(resultSet);
         }
     }
 
-    private void collectResults(ResultSet resultSet) throws SQLException {
-        result.clear();
+    private List<Book> collectResults(ResultSet resultSet) throws SQLException {
+        List<Book> result = new ArrayList<>();
         while(resultSet.next()) {
             result.add(new Book(
                     resultSet.getString("isbn"),
@@ -94,6 +100,7 @@ public class BookSearcher {
                     resultSet.getString("name"),
                     resultSet.getBigDecimal("price")));
         }
+        return result;
     }
 
     private Connection getConnection() throws SQLException {
