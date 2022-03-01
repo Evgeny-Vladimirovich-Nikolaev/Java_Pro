@@ -12,6 +12,7 @@ import java.util.Properties;
 @Controller
 public class BookSearcher {
 
+
     private static final Properties DB_SETTINGS = new Properties();
     private List<Book> result = new ArrayList<>();
 

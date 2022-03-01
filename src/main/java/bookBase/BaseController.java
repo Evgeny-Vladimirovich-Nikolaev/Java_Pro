@@ -14,11 +14,14 @@ import java.util.ResourceBundle;
 @ShellComponent
 public class BaseController {
 
+
+
+
+
     private Locale locale;
     private ResourceBundle resources = ResourceBundle.getBundle("messages");
     private String EXIT_PHRASE;// = resources.getString("app.exit");
     private String APP_ID;// = "appId";
-
 //    private static final ThreadLocal<ObjectMapper> OBJECT_MAPPER = new ThreadLocal<>() {
 //        @Override
 //        public ObjectMapper get() {

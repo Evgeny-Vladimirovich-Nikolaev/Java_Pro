@@ -2,6 +2,7 @@ package bookBase;
 
 public enum Message {
 
+
     SELECT_REQUEST(
             """
             Выберите категорию поиска:

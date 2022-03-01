@@ -10,7 +10,8 @@ import java.util.Set;
 @SpringBootApplication
 public class  BookBaseRunner {
 
-    public static void main(String[] args) throws Exception {
+
+    public static void main(String[] args) {
         Set<Book> books = CsvReader.readAsSet("/books/bookData.csv", Book.class, ';', true);
         new BookBaseAdapter().fillBase(books);
 //        new RequestRunner().startSearching();
