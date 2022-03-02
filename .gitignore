@@ -3,7 +3,6 @@
 /target
 *.iml
 *.gitignore
-*.properties
+db.properties
 docker-compose.yaml
 hibernate.cfg.xml
-*.properties
