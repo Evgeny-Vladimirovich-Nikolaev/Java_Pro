@@ -1,4 +1,4 @@
-package bookBase;
+package ormBookBase.controller;
 
 public enum Message {
 
