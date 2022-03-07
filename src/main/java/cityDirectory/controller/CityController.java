@@ -1,6 +1,8 @@
 package cityDirectory.controller;
 
 import bookBase.BaseController;
+import cityDirectory.service.CityService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -10,7 +12,10 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 @ShellComponent
+@RequiredArgsConstructor
 public class CityController {
+
+    private final CityService cityService;
 
     private ResourceBundle resources = ResourceBundle.getBundle("messages");
     private final String APP_ID = "appId";

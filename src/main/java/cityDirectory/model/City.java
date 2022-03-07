@@ -16,13 +16,14 @@ import javax.persistence.Table;
 public class City {
 
     @Id
+    @Column(name = "code")
     private Integer code;
     @Column(name = "name_ru")
     private String ruName;
     @Column(name = "name_en")
     private String enName;
     @Nullable
-    @Column
+    @Column(name = "population")
     private Integer population;
 
     public City(Integer code, String ruName, String enName) {
