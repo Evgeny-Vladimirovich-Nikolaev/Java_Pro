@@ -10,27 +10,20 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class CityServiceImpl implements CityService {
 
     private final CityRepository repository;
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<City> findByCode(Integer code) {
         return repository.findById(code);
     }
 
     @Override
-    @Transactional(readOnly = false)
     public City save(City city) {
         return repository.save(city);
-    }
-
-    @Override
-    @Transactional(readOnly = false)
-    public City update(City city) {
-        return save(city);
     }
 
     @Override
