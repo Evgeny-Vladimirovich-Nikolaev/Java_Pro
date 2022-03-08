@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.NonUniqueResultException;
 import java.util.Optional;
 
 @Service
@@ -28,7 +29,18 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
+    public Optional<City> findByRuName(String ruName) throws NonUniqueResultException{
+        return repository.findByRuName(ruName);
+    }
+
+    @Override
+    public Optional<City> findByEnName(String enName) throws NonUniqueResultException{
+        return repository.findByEnName(enName);
+    }
+
+    @Override
     public void deleteByCode(Integer code) {
         repository.deleteById(code);
     }
+
 }
