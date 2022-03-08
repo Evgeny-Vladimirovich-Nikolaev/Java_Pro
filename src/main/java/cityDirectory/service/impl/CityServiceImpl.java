@@ -5,10 +5,12 @@ import cityDirectory.repository.CityRepository;
 import cityDirectory.service.CityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class CityServiceImpl implements CityService {
 
@@ -20,11 +22,13 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
+    @Transactional(readOnly = false)
     public City save(City city) {
         return repository.save(city);
     }
 
     @Override
+    @Transactional(readOnly = false)
     public City update(City city) {
         return save(city);
     }

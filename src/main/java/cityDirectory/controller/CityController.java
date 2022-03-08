@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 public class CityController {
 
     private final CityService cityService;
+    private String report;
 
     private final String APP_ID = "appId";
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(BaseController.class);
@@ -30,7 +31,7 @@ public class CityController {
     }
 
     @ShellMethod(value = "save city", key = {"sc", "city"})
-    public void save(
+    public void saveCity(
             @ShellOption({"-c", "--code"}) Integer code,
             @ShellOption({"-ru", "--cityru"}) String ru,
             @ShellOption({"-en", "--cityen"}) String en,
@@ -41,11 +42,12 @@ public class CityController {
     }
 
     @ShellMethod(value = "find by code", key = {"fc", "findc"})
-    public void findByCode(@ShellOption({"-c", "--code"}) Integer code) {
+    public String findByCode(@ShellOption({"-c", "--code"}) Integer code) {
         cityService.findByCode(code).ifPresentOrElse(
-            city -> log.info("Коду {} соответсвует город {}", code, city.toString()),
-            () -> log.warn("Город с кодом {} не найден", code)
+                city -> report = String.format("Коду %s соответствует город %s", code, city.toString()),
+                () -> report = String.format("Город с кодом %s не найден", code)
         );
+        return report;
     }
 
 

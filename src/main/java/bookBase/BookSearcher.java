@@ -3,6 +3,7 @@ package bookBase;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Controller;
 
+import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Properties;
 
 @Controller
+@Transactional(readOnly = true)
 public class BookSearcher {
 
 
