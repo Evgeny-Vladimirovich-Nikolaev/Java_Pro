@@ -39,7 +39,7 @@ public class CityController {
         final City city = new City(code, ru, en);
         city.setPopulation(population);
         cityService.save(city);
-        return String.format(resources.getString("city.saved"), code, ru, en);
+        return String.format(resources.getString("city.saved"), ru, en, code);
     }
 
     @ShellMethod(value = "update population by code", key = {"pc", "popcode"})
@@ -114,7 +114,8 @@ public class CityController {
 
     @ShellMethod(value = "find city by code", key = {"fc", "findc"})
     public String findByCode(@ShellOption({"-c", "--code"}) Integer code) {
-        cityService.findByCode(code).ifPresentOrElse(
+        city = cityService.findByCode(code);
+        city.ifPresentOrElse(
                 city -> report = String.format(resources.getString("city.code.results"), code, city.toString()),
                 () -> report = String.format(resources.getString("city.no.code.results"), code)
         );

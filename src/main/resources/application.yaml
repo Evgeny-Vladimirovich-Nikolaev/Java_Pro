@@ -14,7 +14,7 @@ spring:
     basename: messages # i18n.messages
 
   datasource:
-    url: &dbUrl jdbc:mysql://localhost:3306/db
+    url: &dbUrl jdbc:mysql://localhost:3366/db
     username: user
     password: password
     driverClassName: com.mysql.cj.jdbc.Driver
