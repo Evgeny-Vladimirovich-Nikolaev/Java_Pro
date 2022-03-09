@@ -1,10 +1,8 @@
 package cityDirectory.controller;
 
-import bookBase.BaseController;
 import cityDirectory.model.City;
 import cityDirectory.service.CityService;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
@@ -23,12 +21,11 @@ public class CityController {
     private String report;
 
     private final String APP_ID = "appId";
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(BaseController.class);
     ResourceBundle resources = ResourceBundle.getBundle("messages");
 
 
     @ShellMethod(value = "change language", key = {"l", "lang"})
-    public String changeLocale(@ShellOption({"-l, --lang"}) String lang) {
+    public String changeLocale(@ShellOption("-l") String lang) {
         resources = ResourceBundle.getBundle("messages", new Locale(lang));
         return resources.getString("lang");
     }
@@ -64,52 +61,53 @@ public class CityController {
         findByName(name);
         city.ifPresentOrElse(
                 c -> report = updatePopulation(c, population),
-                () -> report = String.format("Город %s в базе не найден", name)
+                () -> report = String.format(resources.getString("city.no.name.results"), name)
         );
         return report;
     }
 
     @ShellMethod(value = "delete city by code", key = {"dc", "delc"})
     public String deleteByCode(
-            @ShellOption({"-nru", "--runame"}) String ruName,
-            @ShellOption(value = {"-p", "--pop"}) Integer population) {
-        findByName(ruName);
+            @ShellOption({"-c", "--code"}) Integer code) {
+        findByCode(code);
         city.ifPresentOrElse(
-                c -> report = updatePopulation(c, population),
-                () -> report = String.format("Город %s в базе не найден", ruName)
+                c -> {
+                    cityService.deleteByCode(city.get().getCode());
+                    report = String.format(resources.getString("city.removed"), code);
+                },
+                () -> report = String.format(resources.getString("city.no.code.results"), code)
         );
         return report;
     }
 
     @ShellMethod(value = "delete city by name", key = {"dn", "deln"})
     public String deleteByName(
-            @ShellOption({"-nru", "--name"}) String name) {
+            @ShellOption({"-n", "--name"}) String name) {
         findByName(name);
         city.ifPresentOrElse(
                 c -> {
                     cityService.deleteByCode(city.get().getCode());
-                    report = String.format("Город %s успешно удалён из базы", name);
+                    report = String.format(resources.getString("city.removed"), name);
                 },
-                () -> report = String.format("Город %s в базе не найден", name)
+                () -> report = String.format(resources.getString("city.no.name.results"), name)
         );
         return report;
     }
 
     @ShellMethod(value = "find city by name", key = {"fn", "findn"})
-    public String findByName(
-            @ShellOption(value = {"-n", "--name"}, defaultValue = ShellOption.NULL) String name) {
+    public String findByName(@ShellOption({"-n", "--name"}) String name) {
         try {
             city = cityService.findByRuName(name);
             if (city.isEmpty()) {
                 city = cityService.findByEnName(name);
             }
             if (city.isEmpty()) {
-                report = String.format("Город %s в базе не найден", name);
+                report = String.format(resources.getString("city.no.name.results"), name);
             } else {
                 report = city.toString();
             }
         } catch (NonUniqueResultException e) {
-            report = "Невозможно завершить операцию, так как значение %s не является уникальным";
+            report = String.format(resources.getString("city.invalid.operation"), name);
         }
         return report;
     }
@@ -117,8 +115,8 @@ public class CityController {
     @ShellMethod(value = "find city by code", key = {"fc", "findc"})
     public String findByCode(@ShellOption({"-c", "--code"}) Integer code) {
         cityService.findByCode(code).ifPresentOrElse(
-                city -> report = String.format("Коду %s соответствует город %s", code, city.toString()),
-                () -> report = String.format("Город с кодом %s в базе не найден", code)
+                city -> report = String.format(resources.getString("city.code.results"), code, city.toString()),
+                () -> report = String.format(resources.getString("city.no.code.results"), code)
         );
         return report;
     }
@@ -126,7 +124,7 @@ public class CityController {
     private String updatePopulation(City city, Integer population) {
         city.setPopulation(population);
         cityService.save(city);
-        return String.format("Данные о населении города %s внесены в базу", city.getRuName());
+        return String.format(resources.getString("city.population.update"), city.getRuName());
     }
 
 }
