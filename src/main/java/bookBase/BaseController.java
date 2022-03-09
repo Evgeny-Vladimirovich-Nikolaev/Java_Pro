@@ -27,7 +27,7 @@ public class BaseController {
         if(books == null || books.isEmpty()) {
             System.out.println(resources.getString("no.results"));
         } else {
-            System.out.println(resources.getString("results.by.title"));
+            System.out.println(resources.getString("books.results.by.title"));
             for(Book book : books) {
                 System.out.println(book);
             }
@@ -40,7 +40,7 @@ public class BaseController {
         if(books == null || books.isEmpty()) {
             System.out.println(resources.getString("no.results"));
         } else {
-            System.out.println(resources.getString("results.by.author"));
+            System.out.println(resources.getString("books.results.by.author"));
             for(Book book : books) {
                 System.out.println(book);
             }
@@ -54,7 +54,7 @@ public class BaseController {
         if(books == null || books.isEmpty()) {
             System.out.println(resources.getString("no.results"));
         } else {
-            System.out.println(resources.getString("results.by.price"));
+            System.out.println(resources.getString("books.results.by.price"));
             for(Book book : books) {
                 System.out.println(book);
             }

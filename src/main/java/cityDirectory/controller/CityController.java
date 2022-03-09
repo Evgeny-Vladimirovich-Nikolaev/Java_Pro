@@ -24,15 +24,17 @@ public class CityController {
 
     private final String APP_ID = "appId";
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(BaseController.class);
+    ResourceBundle resources = ResourceBundle.getBundle("messages");
+
 
     @ShellMethod(value = "change language", key = {"l", "lang"})
-    public void changeLocale(@ShellOption({"-l, --lang"}) String lang) {
-        System.out.println("Смена языка");
-        ResourceBundle resources = ResourceBundle.getBundle("messages", new Locale(lang));
+    public String changeLocale(@ShellOption({"-l, --lang"}) String lang) {
+        resources = ResourceBundle.getBundle("messages", new Locale(lang));
+        return resources.getString("lang");
     }
 
     @ShellMethod(value = "save/update city", key = {"sc", "savecity"})
-    public void save(
+    public String save(
             @ShellOption({"-c", "--code"}) Integer code,
             @ShellOption({"-ru", "--cityru"}) String ru,
             @ShellOption({"-en", "--cityen"}) String en,
@@ -40,6 +42,7 @@ public class CityController {
         final City city = new City(code, ru, en);
         city.setPopulation(population);
         cityService.save(city);
+        return String.format(resources.getString("city.saved"), code, ru, en);
     }
 
     @ShellMethod(value = "update population by code", key = {"pc", "popcode"})
@@ -49,7 +52,7 @@ public class CityController {
         findByCode(code);
         city.ifPresentOrElse(
                 city -> report = updatePopulation(city, population),
-                () -> report = String.format("Город с кодом %s в базе не найден", code)
+                () -> report = String.format(resources.getString("city.no.code.results"), code)
         );
         return report;
     }
