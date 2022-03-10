@@ -94,7 +94,7 @@ public class CityController {
         return report;
     }
 
-    @ShellMethod(value = "find city by name", key = {"fn", "findn"})
+    @ShellMethod(value = "find city by name", key = {"fn", "findname"})
     public String findByName(@ShellOption({"-n", "--name"}) String name) {
         try {
             city = cityService.findByRuName(name);
@@ -104,7 +104,7 @@ public class CityController {
             if (city.isEmpty()) {
                 report = String.format(resources.getString("city.no.name.results"), name);
             } else {
-                report = city.toString();
+                report = resources.getString("search.results") + city.get();
             }
         } catch (NonUniqueResultException e) {
             report = String.format(resources.getString("city.invalid.operation"), name);
@@ -112,11 +112,11 @@ public class CityController {
         return report;
     }
 
-    @ShellMethod(value = "find city by code", key = {"fc", "findc"})
+    @ShellMethod(value = "find city by code", key = {"fc", "findcode"})
     public String findByCode(@ShellOption({"-c", "--code"}) Integer code) {
         city = cityService.findByCode(code);
         city.ifPresentOrElse(
-                city -> report = String.format(resources.getString("city.code.results"), code, city.toString()),
+                city -> report = String.format(resources.getString("city.code.results"), code, city),
                 () -> report = String.format(resources.getString("city.no.code.results"), code)
         );
         return report;
