@@ -39,21 +39,6 @@ spring:
   liquibase:
     change-log: 'classpath:db/migrations/changeLog.xml'
 
-application:
-  value: 12
-  setting:
-    name: *dbUrl
-    file: 'classpath:/file.txt'
-    locale: ru
-    lines:
-      - Тут был текст
-      - И здесь должен быть текст
-      - Финальный текст
-
-
-  main:
-    banner-mode: 'on'
-
 #app:
 #  foodService:
 #    enabled: 1
