@@ -1,31 +1,23 @@
 package bookBase;
 
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.transaction.annotation.Transactional;
-import java.io.IOException;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Properties;
 
 @Controller
 @Transactional(readOnly = true)
 public class BookSearcher {
 
-
-    private static final Properties DB_SETTINGS = new Properties();
+    @Autowired
+    private BaseAdapter baseAdapter;
     private List<Book> result = new ArrayList<>();
-
-    static {
-        try {
-            DB_SETTINGS.load(BookBaseAdapter.class.getResourceAsStream("/db/db.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public List<Book> searchBooks(String categorySearch, String condition) {
         switch (categorySearch) {
@@ -44,7 +36,7 @@ public class BookSearcher {
 
     @SneakyThrows
     private List<Book> searchByTitle(String condition) {
-        try (final Connection connection = getConnection();
+        try (final Connection connection = baseAdapter.getConnection();
              final PreparedStatement searchQuery = connection.prepareStatement(
                      """ 
                             select * from books
@@ -61,7 +53,7 @@ public class BookSearcher {
 
     @SneakyThrows
     private List<Book> searchByAuthor(String condition) {
-        try (final Connection connection = getConnection();
+        try (final Connection connection = baseAdapter.getConnection();
              final PreparedStatement searchQuery = connection.prepareStatement(
                      """ 
                             select * from authors
@@ -78,7 +70,7 @@ public class BookSearcher {
 
     @SneakyThrows
     public List<Book> searchByPrice(String price) {
-        try (final Connection connection = getConnection();
+        try (final Connection connection = baseAdapter.getConnection();
              final PreparedStatement searchQuery = connection.prepareStatement(
                      """ 
                             select * from authors
@@ -105,13 +97,6 @@ public class BookSearcher {
                     resultSet.getBigDecimal("price")));
         }
         return result;
-    }
-
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(
-                DB_SETTINGS.getProperty("jdbc.url"),
-                DB_SETTINGS.getProperty("db.login"),
-                DB_SETTINGS.getProperty("db.password"));
     }
 
     private void writeResponse() {

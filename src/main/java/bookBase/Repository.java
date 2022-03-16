@@ -1,27 +1,22 @@
 package bookBase;
 
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
-public class BookBaseAdapter {
+@Component
+@RequiredArgsConstructor
+public class Repository {
 
-    private static final Properties DB_SETTINGS = new Properties();
+    @Autowired
+    private final BaseAdapter baseAdapter;
 
-    static {
-        try {
-            DB_SETTINGS.load(BookBaseAdapter.class.getResourceAsStream("/db/db.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void fillBase(Set<Book> books) {
-        dropBooksAndAuthorsIfExists();
-        createBooksAndAuthors();
+    public void fillBookBase(Set<Book> books) {
         for (Book book : books) {
             insertBook(insertAuthor(book).orElse(null), book);
         }
@@ -29,7 +24,7 @@ public class BookBaseAdapter {
 
     @SneakyThrows(SQLException.class)
     public void dropBooksAndAuthorsIfExists() {
-        try (final Connection connection = getConnection();
+        try (final Connection connection = baseAdapter.getConnection();
              final PreparedStatement dropIfExistsTableBooks = connection.prepareStatement("drop table if exists books");
              final PreparedStatement dropIfExistsTableAuthors = connection.prepareStatement("drop table if exists authors")) {
             dropIfExistsTableBooks.execute();
@@ -39,7 +34,7 @@ public class BookBaseAdapter {
 
     @SneakyThrows(SQLException.class)
     public void createBooksAndAuthors() {
-        try (final Connection connection = getConnection();
+        try (final Connection connection = baseAdapter.getConnection();
              final PreparedStatement createTableAuthors = connection.prepareStatement(
                      """
                              create table authors
@@ -80,7 +75,7 @@ public class BookBaseAdapter {
             return Optional.empty();
         }
 
-        try (final Connection connection = getConnection();
+        try (final Connection connection = baseAdapter.getConnection();
              final PreparedStatement authorStatement = connection.prepareStatement("insert into authors(name) values(?)");
              final PreparedStatement searchAuthorStatement = connection.prepareStatement("select id from authors where name = ?")
         ) {
@@ -99,7 +94,7 @@ public class BookBaseAdapter {
 
     @SneakyThrows(SQLException.class)
     public void insertBook(Integer authorId, Book book) {
-        try (final Connection connection = getConnection();
+        try (final Connection connection = baseAdapter.getConnection();
              final PreparedStatement fullBookStatement = connection.prepareStatement(
                      """
                              insert into books(isbn, title, url, price, pages, author_id)
@@ -136,10 +131,4 @@ public class BookBaseAdapter {
         return Long.parseLong(book.getIsbn().replaceAll("[^0-9.]", ""));
     }
 
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(
-                DB_SETTINGS.getProperty("jdbc.url"),
-                DB_SETTINGS.getProperty("db.login"),
-                DB_SETTINGS.getProperty("db.password"));
-    }
 }

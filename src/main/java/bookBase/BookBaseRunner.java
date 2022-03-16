@@ -2,7 +2,6 @@ package bookBase;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import receiver.ValueReceiver;
 import utils.CsvReader;
 
 import java.util.Set;
@@ -12,7 +11,10 @@ public class  BookBaseRunner {
 
     public static void main(String[] args) {
         Set<Book> books = CsvReader.readAsSet("/books/bookData.csv", Book.class, ';', true);
-        new BookBaseAdapter().fillBase(books);
+        Repository repository = new Repository(new BaseAdapter());
+        repository.dropBooksAndAuthorsIfExists();
+        repository.createBooksAndAuthors();
+        repository.fillBookBase(books);
         SpringApplication.run(BookBaseRunner.class, args);
     }
 
