@@ -19,8 +19,6 @@ public class InputController {
     @Value("${spring.application.name}")
     private String application;
 
-    //private final ConverterService converterService;
-
     @PostMapping("/convert")
     public BigDecimal convertToRubles (@RequestParam String code, @RequestParam BigDecimal amount) {
         RateAggregatorImpl rateAggregator = new RateAggregatorImpl();
