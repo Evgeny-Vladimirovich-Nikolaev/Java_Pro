@@ -1,7 +1,9 @@
 package exchangeRate.currency;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@Getter
 @AllArgsConstructor
 public class CurrencyImpl implements Currency {
 
