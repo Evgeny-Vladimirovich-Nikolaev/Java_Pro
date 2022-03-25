@@ -10,19 +10,19 @@
     <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>
 </head>
 <body>
-<img src="img/cbr_middle.jpg" alt="money" class="money-img">
+<img src="img/cbr_middle.jpg" alt="money">
 <h1>Калькулятор валют</h1>
 <p>Выберите код интересующей вас валюты</p>
 <div class="container">
     <div class="currency">
-        <select id="arg1">
+        <select type="text" id="arg1">
             <option value="AUD">AUD</option>
             <option value="EUR">EUR</option>
             <option value="GBP">GBP</option>
             <option value="NOK">NOK</option>
             <option value="USD" selected>USD</option>
         </select>
-        <input type="number" id="arg2" placeholder="0" value="1">
+        <input type="number" id="arg2">
     </div>
 
     <div>
@@ -32,11 +32,10 @@
 
     <div>
         <span id="result">
-            Расчет пока не производился
+            Сумма в рублях:
         </span>
     </div>
 </div>
 
-<script src="js/calculator.js"></script>
 </body>
 </html>

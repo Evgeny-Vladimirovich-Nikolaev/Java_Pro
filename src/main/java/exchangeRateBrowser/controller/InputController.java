@@ -17,7 +17,8 @@ public class InputController {
 
     @PostMapping("/convert")
     public BigDecimal convertToRubles (@RequestParam String code, @RequestParam BigDecimal amount) {
-        return new BigDecimal(1000000.5);
+        System.out.println(code);
+        return amount;
     }
 
 }
