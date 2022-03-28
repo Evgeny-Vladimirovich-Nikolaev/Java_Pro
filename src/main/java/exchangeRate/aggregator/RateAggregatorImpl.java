@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import utils.ResourcesReader;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class RateAggregatorImpl implements RateAggregator {
@@ -42,6 +44,11 @@ public class RateAggregatorImpl implements RateAggregator {
         } else {
             return parseCurrency(c);
         }
+    }
+
+    public Optional<BigDecimal> getValueByCode(String code) {
+        Currency currency = getCurrency(code);
+        return Optional.ofNullable(new BigDecimal(currency.getValue() / currency.getNominal()));
     }
 
     public Currency parseCurrency(String code) {

@@ -6,7 +6,7 @@ $(function () {
             url: '/currencyCalculator/convert?arg1=' + arg1 + '&arg2=' + arg2,
             type: 'POST',
             success: function (result) {
-                $('#result').text('Результат расчета суммы: ' + result.value);
+                $('#result').text('Результат расчета суммы: ' + result);
             }
         });
     });

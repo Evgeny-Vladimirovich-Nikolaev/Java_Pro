@@ -9,6 +9,9 @@ spring:
     name: BookBase
     title-and-banner: 'BookBase'
 
+    cbr:
+      location: https://www.cbr-xml-daily.ru/daily_json.js
+
 
   messages:
     basename: messages # i18n.messages
