@@ -2,16 +2,16 @@ $(function () {
     let rublesInUsd;
 
     $.ajax({
-        url: '/currency?code=USD',
+        url: '/currencyCalculator/convert?code=usd',
         type: 'GET',
-        success: function (data) {
-            rublesInUsd = data.value;
+        success: function (result) {
+            rublesInUsd = result.value;
             console.log('Текущий курс доллара в рублях ' + rublesInUsd);
         }
     });
 
     $('#calculateButton').click(function () {
-        let currency = $('#currencyValue').val();
+        let currency = $('#amount').val();
         let currencyAsNumber;
         // currencyAsNumber = parseInt(currency, 10)
         if (!currency || isNaN(currencyAsNumber = parseFloat(currency)) ||

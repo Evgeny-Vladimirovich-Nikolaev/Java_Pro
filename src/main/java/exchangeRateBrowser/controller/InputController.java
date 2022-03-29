@@ -19,12 +19,14 @@ public class InputController {
     @Value("${spring.application.name}")
     private String application;
 
-    @PostMapping("/convert")
-    public BigDecimal convertToRubles (@RequestParam String code, @RequestParam BigDecimal amount) {
+    @GetMapping("/convert")
+    public CurrencyImpl convertToRubles (@RequestParam String code) {
         RateAggregatorImpl rateAggregator = new RateAggregatorImpl();
         CurrencyImpl currency = (CurrencyImpl) rateAggregator.getCurrency(code);
-        System.out.println(currency);
-        return new BigDecimal(currency.getValue() * amount.doubleValue() / currency.getNominal());
+//        System.out.println(currency);
+//        BigDecimal result = new BigDecimal(currency.getValue() / currency.getNominal());
+//        return result;
+        return currency;
     }
 
 }

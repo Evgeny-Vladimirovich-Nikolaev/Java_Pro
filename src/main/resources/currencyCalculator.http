@@ -1,1 +1,1 @@
-POST http://localhost:8080/currencyCalculator/convert?code=EUR&amount=1.5
+GET http://localhost:8080/currencyCalculator/convert?code=usd
