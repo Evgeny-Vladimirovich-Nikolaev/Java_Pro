@@ -20,13 +20,13 @@ public class InputController {
     private String application;
 
     @GetMapping("/convert")
-    public CurrencyImpl convertToRubles (@RequestParam String code) {
+    public BigDecimal convertToRubles (@RequestParam String code) {
         RateAggregatorImpl rateAggregator = new RateAggregatorImpl();
         CurrencyImpl currency = (CurrencyImpl) rateAggregator.getCurrency(code);
-//        System.out.println(currency);
-//        BigDecimal result = new BigDecimal(currency.getValue() / currency.getNominal());
-//        return result;
-        return currency;
+        System.out.println(currency);
+        BigDecimal result = new BigDecimal(currency.getValue() / currency.getNominal());
+        return result;
+//        return currency;
     }
 
 }

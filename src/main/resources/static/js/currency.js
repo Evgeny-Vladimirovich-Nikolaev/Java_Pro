@@ -1,12 +1,13 @@
 $(function () {
     let rublesInUsd;
+    let request;
+    let code = $('#code').val();
 
     $.ajax({
-        url: '/currencyCalculator/convert?code=usd',
+        url: '/currencyCalculator/convert?code=' + code,
         type: 'GET',
         success: function (result) {
-            rublesInUsd = result.value;
-            console.log('Текущий курс доллара в рублях ' + rublesInUsd);
+            rublesInUsd = result;
         }
     });
 
@@ -17,12 +18,11 @@ $(function () {
         if (!currency || isNaN(currencyAsNumber = parseFloat(currency)) ||
             currencyAsNumber < 0) {
             $('#result').text('Произошла ошибка во время расчета');
-            alert('Введенное значение некорректно, что приводит к невозможности произвести конвертацию');
+            alert('Введенно некорректное значение, попробуйте еще раз');
             return;
         }
         $('#currencyValue').val(currencyAsNumber);
         currencyAsNumber *= rublesInUsd;
-        console.log('Результат вычисления ' + currencyAsNumber);
-        $('#result').text('Результат конвертации : ' + currencyAsNumber + ' рублей');
+        $('#result').text('Сумма в рублях: ' + currencyAsNumber);
     });
 });
