@@ -4,7 +4,7 @@ $(function () {
     let code = $('#code').val();
 
     $.ajax({
-        url: '/currencyCalculator/convert?code=' + code,
+        url: '/currencyCalculator/convert?code=' + $('#code').val(),
         type: 'GET',
         success: function (result) {
             rublesInUsd = result;

@@ -2,15 +2,13 @@ package exchangeRateBrowser.controller;
 
 import exchangeRate.aggregator.RateAggregatorImpl;
 import exchangeRate.currency.CurrencyImpl;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
 @RestController
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @RequestMapping("/currencyCalculator")
 public class InputController {
 
@@ -26,7 +24,6 @@ public class InputController {
         System.out.println(currency);
         BigDecimal result = new BigDecimal(currency.getValue() / currency.getNominal());
         return result;
-//        return currency;
     }
 
 }
