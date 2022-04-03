@@ -6,7 +6,9 @@ import java.math.BigDecimal;
 
 public interface BankingOperations {
 
-    AccountDto createAccount (String owner);
-    AccountDto createAccount (String owner, BigDecimal balance);
-
+    AccountDto createAccount(String owner);
+    AccountDto createAccount(String owner, BigDecimal balance);
+    AccountDto readAccount(Long id);
+    boolean deposit(Long id, BigDecimal amount);
+    boolean withdraw(Long id, BigDecimal amount);
 }
