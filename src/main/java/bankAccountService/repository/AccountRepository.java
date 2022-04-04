@@ -9,8 +9,8 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 public interface AccountRepository extends JpaRepository<AccountDto, Long> {
-    AccountDto createAccountDto(String owner);
-    AccountDto createAccountDto(String owner, BigDecimal balance);
-    Optional<AccountDto> findById(Long id) throws NonUniqueResultException;
-    Optional<AccountDto> updateById(Long id) throws NonUniqueResultException;
+//    AccountDto createAccountDto(String owner);
+//    AccountDto createAccountDto(String owner, BigDecimal balance);
+//    Optional<AccountDto> findById(Long id) throws NonUniqueResultException;
+//    Optional<AccountDto> updateById(Long id) throws NonUniqueResultException;
 }
