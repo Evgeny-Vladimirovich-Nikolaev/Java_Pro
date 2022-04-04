@@ -3,15 +3,18 @@ $(function () {
     let request;
     let code = $('#code').val();
 
-    $.ajax({
-        url: '/currencyCalculator/convert?code=' + $('#code').val(),
-        type: 'GET',
-        success: function (result) {
-            rublesInUsd = result;
-        }
-    });
-
     $('#calculateButton').click(function () {
+
+
+        $.ajax({
+            url: '/currencyCalculator/convert?code=' + $('#code').val(),
+            type: 'GET',
+            success: function (result) {
+                rublesInUsd = result;
+            }
+        });
+
+
         let currency = $('#amount').val();
         let currencyAsNumber;
         // currencyAsNumber = parseInt(currency, 10)

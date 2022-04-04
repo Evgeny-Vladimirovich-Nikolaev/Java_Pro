@@ -36,7 +36,7 @@ public class RateAggregatorImpl implements RateAggregator {
     }
 
     @Override
-    public Currency getCurrency(String code) {
+    public Currency getCurrency(String code) throws IOException {
         String c = code.toUpperCase();
         if (rate.containsKey(c)) {
             System.out.println("Результат будет получен из кэша");
@@ -47,7 +47,13 @@ public class RateAggregatorImpl implements RateAggregator {
     }
 
     public Optional<BigDecimal> getValueByCode(String code) {
-        Currency currency = getCurrency(code);
+        Currency currency = null;
+        try {
+            currency = getCurrency(code);
+        } catch (IOException e) {
+            System.out.println("Ошибка соединения с сервером");
+            e.printStackTrace();
+        }
         return Optional.ofNullable(new BigDecimal(currency.getValue() / currency.getNominal()));
     }
 

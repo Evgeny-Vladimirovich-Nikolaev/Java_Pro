@@ -2,9 +2,12 @@ package bankAccountService.service.impl;
 
 import bankAccountService.dto.AccountDto;
 import bankAccountService.service.BankingOperations;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
+@Service
 public class BankingOperationsImpl implements BankingOperations {
     @Override
     public AccountDto createAccount(String owner) {
@@ -17,7 +20,7 @@ public class BankingOperationsImpl implements BankingOperations {
     }
 
     @Override
-    public AccountDto readAccount(Long id) {
+    public Optional<AccountDto> readAccount(Long id) {
         return null;
     }
 
