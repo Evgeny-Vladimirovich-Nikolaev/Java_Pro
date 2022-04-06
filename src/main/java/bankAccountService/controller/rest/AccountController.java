@@ -2,6 +2,7 @@ package bankAccountService.controller.rest;
 
 import bankAccountService.model.Account;
 import bankAccountService.service.BankingOperations;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 @RestController
+//@NoArgsConstructor
 @RequiredArgsConstructor
 public class AccountController {
 

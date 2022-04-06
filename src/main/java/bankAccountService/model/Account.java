@@ -11,17 +11,17 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-//@Entity
-//@Table(name = "bank_account")
+@Entity
+@Table(name = "bank_account")
 public class Account {
 
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //@NotEmpty
-    //@Column
+    @NotEmpty
+    @Column
     private String owner;
-    //@NotEmpty
-    //@Column
+    @NotEmpty
+    @Column
     private BigDecimal balance;
 }

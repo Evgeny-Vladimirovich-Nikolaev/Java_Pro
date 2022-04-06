@@ -57,9 +57,10 @@ public class BankingOperationsImpl implements BankingOperations {
 
     @Override
     public boolean closeAccount(Long id) {
+        System.out.println("sout");
         Optional<Account> accountDto = getAccount(id);
         accountDto.get().setBalance(new BigDecimal(0));
-        repository.deleteById(id);
+        repository.delete(accountDto.get());
         return true;
     }
 }
