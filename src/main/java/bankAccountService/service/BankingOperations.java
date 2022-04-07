@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public interface BankingOperations {
 
-    Account createAccount(String owner, BigDecimal balance);
-    Optional<Account> getAccount(Long id);
+    Optional<Account> createAccount(String owner, BigDecimal transfer);
+    Optional<Account> findByAccount(Long id);
     boolean deposit(Long id, BigDecimal amount);
     boolean withdraw(Long id, BigDecimal amount);
     boolean closeAccount(Long id);

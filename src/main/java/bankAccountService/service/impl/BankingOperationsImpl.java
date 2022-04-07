@@ -4,9 +4,7 @@ import bankAccountService.model.Account;
 import bankAccountService.repository.AccountRepository;
 import bankAccountService.service.BankingOperations;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,23 +19,23 @@ public class BankingOperationsImpl implements BankingOperations {
     private final AccountRepository repository;
 
     @Override
-    public Account createAccount(String owner, @Value("0") BigDecimal amount) {
+    public Optional<Account> createAccount(String owner, @Value("0") BigDecimal transfer) {
         Account account = new Account();
         account.setOwner(owner);
-        account.setBalance(amount);
+        account.setBalance(transfer);
         repository.save(account);
-        return account;
+        return Optional.of(account);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Account> getAccount(Long id) {
+    public Optional<Account> findByAccount(Long id) {
         return  Optional.of(repository.findById(id)).orElseThrow();
     }
 
     @Override
     public boolean deposit(Long id, BigDecimal transfer) {
-        Optional<Account> accountDto = getAccount(id);
+        Optional<Account> accountDto = findByAccount(id);
         BigDecimal balance = accountDto.get().getBalance();
         accountDto.get().setBalance(balance.add(transfer));
         repository.save(accountDto.get());
@@ -46,7 +44,7 @@ public class BankingOperationsImpl implements BankingOperations {
 
     @Override
     public boolean withdraw(Long id, BigDecimal transfer) {
-        Optional<Account> accountDto = getAccount(id);
+        Optional<Account> accountDto = findByAccount(id);
         BigDecimal balance = accountDto.get().getBalance();
         if(balance.doubleValue() >= transfer.doubleValue()){
             accountDto.get().setBalance(balance.subtract(transfer));
@@ -58,7 +56,7 @@ public class BankingOperationsImpl implements BankingOperations {
     @Override
     public boolean closeAccount(Long id) {
         System.out.println("sout");
-        Optional<Account> accountDto = getAccount(id);
+        Optional<Account> accountDto = findByAccount(id);
         accountDto.get().setBalance(new BigDecimal(0));
         repository.delete(accountDto.get());
         return true;
