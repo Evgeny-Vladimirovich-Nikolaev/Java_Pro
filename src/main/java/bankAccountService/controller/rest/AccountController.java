@@ -4,10 +4,7 @@ import bankAccountService.model.Account;
 import bankAccountService.service.BankingOperations;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
@@ -20,28 +17,28 @@ public class AccountController {
 
     private final BankingOperations operations;
 
-    @PostMapping("/createAccount")
-    public Account createAccount(@NotEmpty String owner, @Value("0") BigDecimal transfer) {
-        return operations.createAccount(owner, transfer).get();
+    @GetMapping("/createAccount")
+    public Optional<Account> createAccount(@RequestParam String owner, @RequestParam BigDecimal transfer) {
+        return operations.createAccount(owner, transfer);
     }
 
     @GetMapping("/findById")
-    public Optional<Account> findById(Long id) {
+    public Optional<Account> findById(@RequestParam Long id) {
         return operations.findByAccount(id);
     }
 
     @GetMapping("/deposit")
-    public boolean deposit(Long id, BigDecimal amount) {
-        return operations.deposit(id, amount);
+    public boolean deposit(@RequestParam Long id, @RequestParam BigDecimal transfer) {
+        return operations.deposit(id, transfer);
     }
 
     @GetMapping("/withdraw")
-    public boolean withdraw(Long id, BigDecimal amount) {
-        return operations.withdraw(id, amount);
+    public boolean withdraw(@RequestParam Long id, @RequestParam BigDecimal transfer) {
+        return operations.withdraw(id, transfer);
     }
 
     @GetMapping("/closeAccount")
-    public boolean closeAccount(Long id) {
+    public boolean closeAccount(@RequestParam Long id) {
         return operations.closeAccount(id);
     }
 }

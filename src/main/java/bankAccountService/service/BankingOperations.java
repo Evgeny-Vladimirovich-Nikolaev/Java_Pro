@@ -9,7 +9,7 @@ public interface BankingOperations {
 
     Optional<Account> createAccount(String owner, BigDecimal transfer);
     Optional<Account> findByAccount(Long id);
-    boolean deposit(Long id, BigDecimal amount);
-    boolean withdraw(Long id, BigDecimal amount);
+    boolean deposit(Long id, BigDecimal transfer);
+    boolean withdraw(Long id, BigDecimal transfer);
     boolean closeAccount(Long id);
 }
