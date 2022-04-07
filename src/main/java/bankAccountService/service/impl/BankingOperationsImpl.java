@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
 import java.util.Optional;
 
@@ -19,7 +20,7 @@ public class BankingOperationsImpl implements BankingOperations {
     private final AccountRepository repository;
 
     @Override
-    public Optional<Account> createAccount(String owner, @Value("0") BigDecimal transfer) {
+    public Optional<Account> createAccount(String owner, @DecimalMin("0") BigDecimal transfer) {
         Account account = new Account();
         account.setOwner(owner);
         account.setBalance(transfer);
@@ -59,5 +60,13 @@ public class BankingOperationsImpl implements BankingOperations {
         accountDto.get().setBalance(new BigDecimal(0));
         repository.delete(accountDto.get());
         return true;
+    }
+
+    @Override
+    public Optional<Account> changeName(Long id) {
+        Optional<Account> accountDto = findByAccount(id);
+        accountDto.get().setOwner("newOwner");
+        repository.save(accountDto.get());
+        return Optional.of(accountDto).orElseThrow();
     }
 }
