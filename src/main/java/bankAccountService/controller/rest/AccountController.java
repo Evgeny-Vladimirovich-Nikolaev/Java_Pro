@@ -25,6 +25,7 @@ public class AccountController {
 
     @GetMapping("/findById")
     public Optional<Account> findById(@RequestParam Long id) {
+        System.out.println("Вызов из браузера");
         return operations.findByAccount(id);
     }
 
