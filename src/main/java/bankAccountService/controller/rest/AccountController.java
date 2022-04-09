@@ -25,18 +25,20 @@ public class AccountController {
 
     @GetMapping("/findById")
     public Optional<Account> findById(@RequestParam Long id) {
+        System.out.println("Вызван метод findById");
         return operations.findByAccount(id);
     }
 
     @GetMapping("/deposit")
-    public boolean deposit(@RequestParam Long id, @RequestParam @NumberFormat(pattern = "###.###,##")BigDecimal transfer) {
-        System.out.println("sout");
-        return operations.deposit(id, transfer);
+    public boolean deposit(@RequestParam Long id /*, @RequestParam @NumberFormat(pattern = "###.###,##")BigDecimal transfer*/) {
+        System.out.println("Вызван метод deposit");
+        //return operations.deposit(id, transfer);
+        return true;
     }
 
     @GetMapping("/withdraw")
     public boolean withdraw(@RequestParam Long id, @RequestParam @NumberFormat(pattern = "###.###,##")BigDecimal transfer) {
-        System.out.println("sout");
+        System.out.println("Вызван метод withdraw");
         return operations.withdraw(id, transfer);
     }
 

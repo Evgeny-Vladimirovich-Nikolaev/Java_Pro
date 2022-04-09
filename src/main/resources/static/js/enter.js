@@ -2,8 +2,7 @@ $(function () {
     let id;
     let owner;
     let balance;
-    let depositTransfer;
-    let withdrawTransfer;
+    let transfer;
 
     $('#buttonInput').click(function () {
         id = $('#inputId').val();
@@ -48,17 +47,41 @@ $(function () {
 
     $('#buttonDeposit').click(function () {
         id = $('#inputId').val();
-        depositTransfer = $('#inputDeposit');
+        transfer = $('#inputDeposit');
         if (!id || isNaN(id = parseInt($('#inputId').val()) || id < 1)) {
             alert('Введенно некорректное значение, попробуйте еще раз');
             return;
         }
-        if (!depositTransfer || isNaN(depositTransfer = parseFloat($('#inputId').val()) || depositTransfer < 0)) {
+        if (!transfer || isNaN(transfer = parseFloat($('#inputDeposit').val()) || transfer < 0)) {
             alert('Введена некорректная сумма');
             return;
         }
         $.ajax({
-            url: '/bank//deposit?id=' + id + 'transfer=' + depositTransfer,
+            url: '/bank/deposit?id=' + id + 'transfer=' + transfer,
+            type: 'GET',
+            success: function (result) {
+                if (result === true) {
+                    alert('Счет успешно пополнен');
+                } else {
+                    alert('Не удалось пополнить счет');
+                }
+            },
+        });
+    });
+
+    $('#buttonWithdraw').click(function () {
+        id = $('#inputId').val();
+        transfer = $('#inputWithdraw');
+        if (!id || isNaN( id= parseInt($('#inputId').val()) || id < 1)) {
+            alert('Введенно некорректное значение, попробуйте еще раз');
+            return;
+        }
+        if (!transfer || isNaN(transfer = parseFloat($('#inputWithdraw').val()) || transfer < 0)) {
+            alert('Введена некорректная сумма');
+            return;
+        }
+        $.ajax({
+            url: '/bank/withdraw?id=' + id + 'transfer=' + transfer,
             type: 'GET',
             success: function (result) {
                 if (result === true) {
