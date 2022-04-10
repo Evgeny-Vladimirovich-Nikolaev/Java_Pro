@@ -1,6 +1,5 @@
 $(function () {
     let id;
-    let owner;
     let balance;
     let transfer;
 
@@ -15,14 +14,10 @@ $(function () {
             type: 'GET',
             success: function (result) {
                 if (result !== null) {
-                    wner = result.owner;
                     balance = result.balance;
                     $('#spanId').text('Id: ' + id);
                     $('#spanOwner').text('Owner: ' + result.owner);
                     $('#spanBalance').text('Balance: ' + result.balance);
-                    $('#buttonDeposit').disabled = false;
-                    $('#buttonWithdraw').disabled = true;
-                    document.getElementById('buttonDeposit').disabled = false;
                     document.getElementById('buttonWithdraw').disabled = false;
                     document.getElementById('buttonClose').disabled = false;
                     document.getElementById('inputDeposit').disabled = false;
@@ -57,39 +52,31 @@ $(function () {
             return;
         }
         $.ajax({
-            url: '/bank/deposit?id=' + id + 'transfer=' + transfer,
-            type: 'GET',
-            success: function (result) {
-                if (result === true) {
-                    alert('Счет успешно пополнен');
-                } else {
-                    alert('Не удалось пополнить счет');
-                }
-            },
-        });
+            url: '/bank/account/' + id + '/deposit?transfer=' + transfer,
+            type: 'PATCH',
+            success: function (data) {
+                alert("Успешное пополнение аккаунта")
+            }
+        })
     });
 
     $('#buttonWithdraw').click(function () {
         id = $('#inputId').val();
         transfer = $('#inputWithdraw');
-        if (!id || isNaN( id= parseInt($('#inputId').val()) || id < 1)) {
+        if (!id || isNaN(id = parseInt($('#inputId').val()) || id < 1)) {
             alert('Введенно некорректное значение, попробуйте еще раз');
             return;
         }
-        if (!transfer || isNaN(transfer = parseFloat($('#inputWithdraw').val()) || transfer < 0)) {
+        if (!transfer || isNaN(transfer = parseFloat($('#inputDeposit').val()) || transfer < 0)) {
             alert('Введена некорректная сумма');
             return;
         }
         $.ajax({
-            url: '/bank/withdraw?id=' + id + 'transfer=' + transfer,
-            type: 'GET',
-            success: function (result) {
-                if (result === true) {
-                    alert('Счет успешно пополнен');
-                } else {
-                    alert('Не удалось пополнить счет');
-                }
-            },
-        });
+            url: '/bank/account/' + id + '/withdraw?transfer=' + transfer,
+            type: 'PATCH',
+            success: function (data) {
+                alert("Успешное пополнение аккаунта")
+            }
+        })
     });
 });
