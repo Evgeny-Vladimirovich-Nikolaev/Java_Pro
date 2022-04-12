@@ -3,6 +3,7 @@ package computerAccessories.service.impl;
 import computerAccessories.dto.AccessoryDto;
 import computerAccessories.dto.AccessoryPageDto;
 import computerAccessories.mapper.AccessoryMapper;
+import computerAccessories.mapper.impl.AccessoryMapperImpl;
 import computerAccessories.model.Accessory;
 import computerAccessories.repository.AccessoryRepository;
 import computerAccessories.service.AccessoryService;
@@ -22,7 +23,7 @@ import java.util.Optional;
 public class AccessoryServiceImpl implements AccessoryService {
 
     private final AccessoryRepository accessoryRepository;
-    private final AccessoryMapper accessoryMapper;
+    private AccessoryMapper accessoryMapper = new AccessoryMapperImpl();
 
     @Override
     @Transactional(readOnly = true)

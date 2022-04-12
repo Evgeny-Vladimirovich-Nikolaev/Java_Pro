@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Mapper
+
 public interface AccessoryMapper {
 
     @Mapping(target = "code", source = "entity.code")
