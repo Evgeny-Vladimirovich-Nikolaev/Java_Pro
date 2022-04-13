@@ -11,14 +11,16 @@
             </not>
         </preConditions>
         <createTable tableName="computer_accessories">
-            <column name="code" type="VARCHAR(255)" >
+            <column name="code" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
-  <insert tableName="computer_accessories">
+    </changeSet>
+    <changeSet id="init-1" author="Evgeny Nikolaev">
+        <insert tableName="computer_accessories">
             <column name="code" value="CD-ROM">
             </column>
             <column name="name" value="Compact Disc Read-Only Memory">
