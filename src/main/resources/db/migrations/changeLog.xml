@@ -5,7 +5,7 @@
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <include file="dbCities.xml" relativeToChangelogFile="true"/>
-<!--    <include file="bank_account.xml" relativeToChangelogFile="true"/>-->
+    <include file="bank_account.xml" relativeToChangelogFile="true"/>
     <include file="computer_accessories.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
