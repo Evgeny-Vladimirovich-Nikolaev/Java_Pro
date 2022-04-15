@@ -1,4 +1,4 @@
-package bankAccountService.controller.config;
+package bankAccountService.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Стартовая страница</title>
-    <link rel="stylesheet" th:href="@{/css/computerAccessories.css}" href="/css/computerAccessories.css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/computerAccessories.css"/>
 </head>
 <body>
 
 <p><strong>Стартовая страница</strong></p>
 <menu>Доступные приложения
+    <ul>
+        <li><a th:href="@{/bank/enter.html}" href="/enter.html">Банковские услуги</a></li>
+    </ul>
     <ul>
         <li><a th:href="@{/accessories}" href="/accessories.html">Компьютерные комплектующие</a></li>
     </ul>
