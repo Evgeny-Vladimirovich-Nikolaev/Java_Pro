@@ -5,30 +5,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/banking-services")
+@RequestMapping()
 public class SiteNavigator {
-    @GetMapping
+    @GetMapping("/bank/create")
     public String create() {
-        return null;
+        return "/bank/create";
     }
 
-    public String enter(String owner, Long id) {
-        return null;
+    @GetMapping("/bank/enter")
+    public String enter() {
+        return "/bank/enter";
     }
 
-    public String deposit(String owner, Long id) {
-        return null;
-    }
-
-    public String withdraw(String owner, Long id) {
-        return null;
-    }
-
-    public String withdrawAndClose(String owner, Long id) {
-        return null;
-    }
-
-    public String Exit() {
-        return null;
-    }
+//    @GetMapping("exit")
+//    public String exit() {
+//        return "/";
+//    }
 }

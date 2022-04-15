@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>Банковские услуги</title>
     <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/enter.js"></script>
+    <script src="js/start.js"></script>
     <!--    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>-->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bank-style.css">
 </head>
 <body>
 <img src="../images/clipart/bank_with_mouse_360x252.jpg" alt="bank_with_mouse_360x252">
@@ -14,11 +14,15 @@
 
 <h1>Сервис банковских услуг</h1>
 <div>
-    <button id="buttonEnter">Войти</button>
+    <button id="buttonEnter" onclick="window.location.href = '/bank/enter.html'">Войти</button>
 </div>
 </p>
 <div>
-    <button id="buttonNewAccount">Открыть новый счет</button>
+    <button id="buttonNewAccount" onclick="window.location.href = '/bank/create.html'">Открыть новый счет</button>
+</div>
+</p>
+<div>
+    <button id="buttonCancel" onclick="window.location.href = '/'">Выйти</button>
 </div>
 </body>
 </html>
