@@ -27,7 +27,7 @@
 </head>
 <body>
 <p><strong>Computer accessories</strong></p>
-
+</p>
 <div id="navigation">
     <a th:if="${accessories.hasPrevious}" th:href="@{/accessories(page=${accessories.currentPage-1})}" href="accessories.html"><img
             alt="Previous page" th:src="@{/images/blue_icons_24x24/left.png}"/></a>
@@ -35,6 +35,7 @@
     <a th:if="${accessories.hasNext}" th:href="@{/accessories(page=${accessories.currentPage + 1})}" href="accessories.html"><img
             alt="Next page" th:src="@{/images/blue_icons_24x24/right.png}"/></a>
 </div>
+</p>
 <table class="accessories">
     <thead>
     <tr>

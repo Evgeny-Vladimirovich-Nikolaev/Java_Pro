@@ -34,7 +34,7 @@ public class AccountController {
         return operations.findByAccount(id);
     }
 
-    @PatchMapping("/account/{id}/deposit")
+    @PatchMapping("/account/zzdeposit")
     public boolean deposit(@PathVariable long id,
                         @RequestParam @NumberFormat(pattern = "###.###,##") BigDecimal transfer) {
         return operations.deposit(id, transfer);
