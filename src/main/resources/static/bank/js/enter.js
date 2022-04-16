@@ -14,31 +14,12 @@ $(function () {
             url: '/bank/findById?id=' + id,
             type: 'GET',
             success: function (result) {
+                disableViews(result === null);
                 if (result !== null) {
-                    wner = result.owner;
-                    balance = result.balance;
-                    $('#spanId').text('Номер счета: ' + id);
-                    $('#spanOwner').text('Владелец счета: ' + result.owner);
-                    $('#spanBalance').text('Баланс: ' + result.balance);
-                    $('#buttonDeposit').disabled = false;
-                    $('#buttonWithdraw').disabled = true;
-                    document.getElementById('buttonDeposit').disabled = false;
-                    document.getElementById('buttonWithdraw').disabled = false;
-                    document.getElementById('buttonClose').disabled = false;
-                    document.getElementById('inputDeposit').disabled = false;
-                    document.getElementById('inputWithdraw').disabled = false;
+                    fillData(result.id, result.owner, result.balance);
                     alert('Владелец счета ' + result.owner);
                 } else {
-                    $('#spanId').text('Номер счета: ');
-                    $('#spanOwner').text('Владелец счета: ');
-                    $('#spanBalance').text('Баланс: ');
-                    $('#inputDeposit').disabled = true
-                    $('#inputWithdraw').disabled = true
-                    document.getElementById('buttonDeposit').disabled = true;
-                    document.getElementById('buttonWithdraw').disabled = true;
-                    document.getElementById('buttonClose').disabled = true;
-                    document.getElementById('inputDeposit').disabled = true;
-                    document.getElementById('inputWithdraw').disabled = true;
+                    fillData("отсутствует", "", "" );
                     alert('Такой счет не найден');
                 }
             },
@@ -62,6 +43,7 @@ $(function () {
             type: 'GET',
             success: function (result) {
                 if (result === true) {
+                    fillData(result.id, result.owner, result.balance);
                     alert('Счет успешно пополнен');
                 } else {
                     alert('Не удалось пополнить счет');
@@ -82,13 +64,14 @@ $(function () {
             return;
         }
         $.ajax({
-            url: '/bank/account/' + id + '/withdraw?transfer=' + transfer,
+            url: '/bank/withdraw?id=' + id + '&transfer=' + transfer,
             type: 'GET',
             success: function (result) {
                 if (result === true) {
-                    alert('Счет успешно пополнен');
+                    fillData(result.id, result.owner, result.balance);
+                    alert('Требуемая сумма снятя со счета');
                 } else {
-                    alert('Не удалось пополнить счет');
+                    alert('Не удалось снять деньги со счета');
                 }
             },
         });
@@ -115,7 +98,7 @@ $(function () {
                     document.getElementById('buttonClose').disabled = true;
                     document.getElementById('inputDeposit').disabled = true;
                     document.getElementById('inputWithdraw').disabled = true;
-                    alert('Такой счет не найден');
+                    window.location.href = '/bank/start.html';
                     alert('Счет закрыт');
                 } else {
                     alert('Не удалось закрыть счет');
@@ -123,4 +106,20 @@ $(function () {
             },
         });
     });
+
+    function fillData(id, owner, balance) {
+        $('#spanId').text('Номер счета: ' + id);
+        $('#spanOwner').text('Владелец счета: ' + owner);
+        $('#spanBalance').text('Баланс: ' + balance);
+    }
+
+    function disableViews (availability) {
+        $('#inputDeposit').disabled = true
+        $('#inputWithdraw').disabled = true
+        document.getElementById('buttonDeposit').disabled = availability;
+        document.getElementById('buttonWithdraw').disabled = availability;
+        document.getElementById('buttonClose').disabled = availability;
+        document.getElementById('inputDeposit').disabled = availability;
+        document.getElementById('inputWithdraw').disabled = availability;
+    }
 });

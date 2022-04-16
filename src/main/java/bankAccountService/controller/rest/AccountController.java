@@ -24,7 +24,7 @@ public class AccountController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public Account createAccount(@RequestBody Account account) {
-        operations.createAccount(account.getOwner(),new BigDecimal(0));
+        operations.createAccount(account.getOwner(), account.getBalance());
         return account;
     }
 
@@ -40,8 +40,8 @@ public class AccountController {
         return operations.deposit(id, transfer);
     }
 
-    @PatchMapping("/account/{id}/withdraw")
-    public boolean withdraw(@PathVariable long id,
+    @GetMapping("/withdraw")
+    public boolean withdraw(@RequestParam long id,
                             @RequestParam @NumberFormat(pattern = "###.###,##")BigDecimal transfer) {
         return operations.withdraw(id, transfer);
     }

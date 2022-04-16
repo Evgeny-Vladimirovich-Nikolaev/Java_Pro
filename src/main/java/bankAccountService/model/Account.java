@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 
@@ -21,7 +22,7 @@ public class Account {
     @NotEmpty
     @Column
     private String owner;
-    @NotEmpty
+    @DecimalMin("0")
     @Column
     private BigDecimal balance;
 }

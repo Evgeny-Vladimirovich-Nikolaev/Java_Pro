@@ -20,7 +20,7 @@ public class BankingOperationsImpl implements BankingOperations {
     private final AccountRepository repository;
 
     @Override
-    public Optional<Account> createAccount(String owner, @DecimalMin("0") BigDecimal transfer) {
+    public Optional<Account> createAccount(String owner, BigDecimal transfer) {
         Account account = new Account();
         account.setOwner(owner);
         account.setBalance(transfer);
