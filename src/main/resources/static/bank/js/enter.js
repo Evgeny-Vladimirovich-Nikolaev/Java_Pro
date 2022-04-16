@@ -29,9 +29,9 @@ $(function () {
                     document.getElementById('inputWithdraw').disabled = false;
                     alert('Владелец счета ' + result.owner);
                 } else {
-                    $('#spanId').text('Id: ');
-                    $('#spanOwner').text('Owner: ');
-                    $('#spanBalance').text('Balance: ');
+                    $('#spanId').text('Номер счета: ');
+                    $('#spanOwner').text('Владелец счета: ');
+                    $('#spanBalance').text('Баланс: ');
                     $('#inputDeposit').disabled = true
                     $('#inputWithdraw').disabled = true
                     document.getElementById('buttonDeposit').disabled = true;
@@ -58,7 +58,7 @@ $(function () {
         }
 
         $.ajax({
-            url: '/bank/deposit?id=' + id /*+ 'transfer=' + transfer*/,
+            url: '/bank/deposit?id=' + id + '&transfer=' + transfer,
             type: 'GET',
             success: function (result) {
                 if (result === true) {
@@ -82,7 +82,7 @@ $(function () {
             return;
         }
         $.ajax({
-            url: '/bank/withdraw?id=' + id + 'transfer=' + transfer,
+            url: '/bank/account/' + id + '/withdraw?transfer=' + transfer,
             type: 'GET',
             success: function (result) {
                 if (result === true) {
@@ -105,9 +105,9 @@ $(function () {
             type: 'GET',
             success: function (result) {
                 if (result === true) {
-                    $('#spanId').text('Id: ');
-                    $('#spanOwner').text('Owner: ');
-                    $('#spanBalance').text('Balance: ');
+                    $('#spanId').text('Номер счета: ');
+                    $('#spanOwner').text('Владелец счета: ');
+                    $('#spanBalance').text('Баланс: ');
                     $('#inputDeposit').disabled = true
                     $('#inputWithdraw').disabled = true
                     document.getElementById('buttonDeposit').disabled = true;

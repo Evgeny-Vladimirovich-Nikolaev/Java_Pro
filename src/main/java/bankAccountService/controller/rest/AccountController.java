@@ -34,14 +34,14 @@ public class AccountController {
         return operations.findByAccount(id);
     }
 
-    @PatchMapping("/account/zzdeposit")
-    public boolean deposit(@PathVariable long id,
+    @GetMapping("/deposit")
+    public boolean deposit(@RequestParam Long id,
                         @RequestParam @NumberFormat(pattern = "###.###,##") BigDecimal transfer) {
         return operations.deposit(id, transfer);
     }
 
     @PatchMapping("/account/{id}/withdraw")
-    public boolean withdraw(@PathVariable Long id,
+    public boolean withdraw(@PathVariable long id,
                             @RequestParam @NumberFormat(pattern = "###.###,##")BigDecimal transfer) {
         return operations.withdraw(id, transfer);
     }
