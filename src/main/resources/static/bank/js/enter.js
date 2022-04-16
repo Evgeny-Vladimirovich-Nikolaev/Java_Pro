@@ -1,11 +1,11 @@
 $(function () {
-    let id;
-    let owner;
-    let balance;
-    let transfer;
 
-    $('#buttonInput').click(function () {
-        id = $('#inputId').val();
+    $('#buttonId').click(function () {
+        let id = $('#inputId').val();
+        findById(id);
+    });
+
+    function findById(id) {
         if (!id || isNaN(id = parseInt($('#inputId').val()) || id < 1)) {
             alert('Введенно некорректное значение, попробуйте еще раз');
             return;
@@ -22,9 +22,11 @@ $(function () {
                     fillData("отсутствует", "", "" );
                     alert('Такой счет не найден');
                 }
+                clearSpans();
             },
         });
-    });
+
+    }
 
     $('#buttonDeposit').click(function () {
         id = $('#inputId').val();
@@ -43,13 +45,15 @@ $(function () {
             type: 'GET',
             success: function (result) {
                 if (result === true) {
-                    fillData(result.id, result.owner, result.balance);
+                    findById(id);
                     alert('Счет успешно пополнен');
                 } else {
                     alert('Не удалось пополнить счет');
                 }
+                clearSpans();
             },
         });
+
     });
 
     $('#buttonWithdraw').click(function () {
@@ -68,13 +72,15 @@ $(function () {
             type: 'GET',
             success: function (result) {
                 if (result === true) {
-                    fillData(result.id, result.owner, result.balance);
+                    findById(id);
                     alert('Требуемая сумма снятя со счета');
                 } else {
                     alert('Не удалось снять деньги со счета');
                 }
+                clearSpans();
             },
         });
+
     });
 
     $('#buttonClose').click(function () {
@@ -88,18 +94,8 @@ $(function () {
             type: 'GET',
             success: function (result) {
                 if (result === true) {
-                    $('#spanId').text('Номер счета: ');
-                    $('#spanOwner').text('Владелец счета: ');
-                    $('#spanBalance').text('Баланс: ');
-                    $('#inputDeposit').disabled = true
-                    $('#inputWithdraw').disabled = true
-                    document.getElementById('buttonDeposit').disabled = true;
-                    document.getElementById('buttonWithdraw').disabled = true;
-                    document.getElementById('buttonClose').disabled = true;
-                    document.getElementById('inputDeposit').disabled = true;
-                    document.getElementById('inputWithdraw').disabled = true;
-                    window.location.href = '/bank/start.html';
                     alert('Счет закрыт');
+                    location.href = '../start.html'
                 } else {
                     alert('Не удалось закрыть счет');
                 }
@@ -113,9 +109,14 @@ $(function () {
         $('#spanBalance').text('Баланс: ' + balance);
     }
 
+    function clearSpans() {
+        document.getElementById('inputDeposit').value = "";
+        document.getElementById('inputWithdraw').value = "";
+    }
+
     function disableViews (availability) {
-        $('#inputDeposit').disabled = true
-        $('#inputWithdraw').disabled = true
+        document.getElementById('inputId').disabled = !availability;
+        document.getElementById('buttonId').disabled = !availability;
         document.getElementById('buttonDeposit').disabled = availability;
         document.getElementById('buttonWithdraw').disabled = availability;
         document.getElementById('buttonClose').disabled = availability;
