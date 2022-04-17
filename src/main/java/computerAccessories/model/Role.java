@@ -8,8 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
-//@Entity
-//@Table(name = "roles")
+@Entity
+@Table(name = "roles")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
