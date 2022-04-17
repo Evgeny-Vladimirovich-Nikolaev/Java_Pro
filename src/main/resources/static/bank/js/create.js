@@ -15,14 +15,13 @@ $(function () {
                 'owner': owner,
                 'balance': balance
             }),
-            success: function () {
-                alert('Счет создан успешно');
+            success: function (result) {
+                alert('Счет создан успешно:');
             },
             error: function(xhr, status, error) {
                 alert(xhr.responseJSON.error.message);
-            }
+            },
         });
     });
-
 
 });

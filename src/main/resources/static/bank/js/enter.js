@@ -95,7 +95,7 @@ $(function () {
             success: function (result) {
                 if (result === true) {
                     alert('Счет закрыт');
-                    location.href = '../start.html'
+                    location.href = '/bank/start.html'
                 } else {
                     alert('Не удалось закрыть счет');
                 }
