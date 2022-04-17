@@ -14,7 +14,7 @@ public class AccessoryController {
 
     private final AccessoryService accessoryService;
 
-    @DeleteMapping("/accessories/{code}")
+    @DeleteMapping("/accessories/delete/{code}")
     public ResponseEntity<?> delete(@PathVariable("code") String accessoryCode) {
         accessoryService.deleteByCode(accessoryCode);
         return ResponseEntity.ok(new ResultDto());

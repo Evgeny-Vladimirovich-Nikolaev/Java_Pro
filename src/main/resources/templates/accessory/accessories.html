@@ -11,7 +11,7 @@
                 if (confirm('Are you sure to delete this item?')) {
                     let accessoryCode = $(this).attr('name').replace('accessory_', '');
                     $.ajax({
-                        url: '/accessories/' +accessoryCode,
+                        url: '/accessories/delete/' +accessoryCode,
                         type: 'DELETE',
                         success: function (result) {
                             if (result.success) {
