@@ -61,4 +61,33 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="Init-table-users" author="Evgeny Nikolaev">
+        <preConditions>
+            <tableIsEmpty tableName="users"/>
+        </preConditions>
+        <insert tableName="users">
+            <column name="login">admin</column>
+            <column name="status">1</column>
+            <column name="password">$2a$10$Ca7iacp2X0rCqsHecXuW8OzmSJDOJwYQ8zkmPma.b3qcOpJHjzToC</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="Init-table-roles" author="Evgeny Nikolaev">
+        <preConditions>
+            <tableIsEmpty tableName="roles"/>
+        </preConditions>
+        <insert tableName="roles">
+            <column name="name">admin</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="Init-table-users_roles" author="Evgeny Nikolaev">
+        <preConditions>
+            <tableIsEmpty tableName="users_roles"/>
+        </preConditions>
+        <insert tableName="users_roles">
+            <column name="user_id">1</column>
+            <column name="role_id">1</column>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

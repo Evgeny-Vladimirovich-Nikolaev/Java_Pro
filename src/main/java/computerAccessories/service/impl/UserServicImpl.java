@@ -29,7 +29,7 @@ public class UserServicImpl implements UserServic {
     public UserDto save(UserDto userDto) {
         String encrypt = passwordEncoder.encode(userDto.getPassword());
         userDto.setStatus(Status.OK);
-        userDto.setRole(roleMapper.toDtos(roleReposotory.findByName("ADMIN")));
+        userDto.setRole(roleMapper.toDtos(roleReposotory.findByName("admin")));
         userDto.setPassword(encrypt);
         return userMapper.toDto(userRepository.save(userMapper.toEntity(userDto)));
     }

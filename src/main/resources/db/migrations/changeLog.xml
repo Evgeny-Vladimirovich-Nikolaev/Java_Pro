@@ -8,6 +8,6 @@
     <include file="bank_account.xml" relativeToChangelogFile="true"/>
     <include file="computer_accessories.xml" relativeToChangelogFile="true"/>
     <include file="security.xml" relativeToChangelogFile="true"/>
-    <include file="jwt.xml" relativeToChangelogFile="true"/>
+
 
 </databaseChangeLog>
