@@ -31,42 +31,41 @@ public class BankingOperationsImpl implements BankingOperations {
     @Override
     @Transactional(readOnly = true)
     public Optional<Account> findByAccount(Long id) {
-        return  Optional.of(repository.findById(id)).orElseThrow();
+        return  Optional.of(repository
+                .findById(id))
+                .orElseThrow(() -> new RuntimeException("счет №" + id + " не найден"));
     }
 
     @Override
     public boolean deposit(Long id, BigDecimal transfer) {
-        Optional<Account> accountDto = findByAccount(id);
-        BigDecimal balance = accountDto.get().getBalance();
-        accountDto.get().setBalance(balance.add(transfer));
-        repository.save(accountDto.get());
-        return true;
+        return findByAccount(id)
+                .map(account -> {
+                    BigDecimal balance = account.getBalance();
+                    account.setBalance(balance.add(transfer));
+                    repository.save(account);
+                    return true;
+                }).orElse(false);
     }
 
     @Override
     public boolean withdraw(Long id, BigDecimal transfer) {
-        Optional<Account> accountDto = findByAccount(id);
-        BigDecimal balance = accountDto.get().getBalance();
-        if(balance.doubleValue() >= transfer.doubleValue()){
-            accountDto.get().setBalance(balance.subtract(transfer));
-            return true;
-        }
-        return false;
+        return findByAccount(id)
+                .map(account -> {
+                    BigDecimal balance = account.getBalance();
+                    account.setBalance(balance.subtract(transfer));
+                    repository.save(account);
+                    return true;
+                }).orElse(false);
     }
 
     @Override
     public boolean closeAccount(Long id) {
-        Optional<Account> accountDto = findByAccount(id);
-        accountDto.get().setBalance(new BigDecimal(0));
-        repository.delete(accountDto.get());
-        return true;
+        return findByAccount(id)
+                .map(account -> {
+                    account.setBalance(new BigDecimal(0));
+                    repository.delete(account);
+                    return true;
+                }).orElse(false);
     }
 
-    @Override
-    public Optional<Account> changeName(Long id) {
-        Optional<Account> accountDto = findByAccount(id);
-        accountDto.get().setOwner("newOwner");
-        repository.save(accountDto.get());
-        return Optional.of(accountDto).orElseThrow();
-    }
 }

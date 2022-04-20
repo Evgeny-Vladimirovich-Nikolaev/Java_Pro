@@ -30,7 +30,6 @@ public class AccountController {
 
     @GetMapping("/findById")
     public Optional<Account> findById(@RequestParam Long id) {
-        System.out.println("Вызван метод findById");
         return operations.findByAccount(id);
     }
 

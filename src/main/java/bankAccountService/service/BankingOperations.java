@@ -12,5 +12,5 @@ public interface BankingOperations {
     boolean deposit(Long id, BigDecimal transfer);
     boolean withdraw(Long id, BigDecimal transfer);
     boolean closeAccount(Long id);
-    Optional<Account> changeName(Long id);
+
 }
