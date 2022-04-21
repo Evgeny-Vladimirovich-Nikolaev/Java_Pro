@@ -50,17 +50,24 @@
         <td th:text="${accessory.name}">Art</td>
         <td>
             <a th:href="@{/accessory/edit(code=${accessory.code})}" href="accessory.html"><img alt="Edit"
-                                                                                   th:src="@{/images/blue_icons_24x24/edit.png}"/></a>
-            <a id="delete-handler" th:id="${accessory.codeStr}" th:name="${accessory.codeStr}" href="book.html"><img
-                    alt="Delete" th:src="@{/images/blue_icons_24x24/trash.png}"/></a>
+                                                                                               th:src="@{/images/blue_icons_24x24/edit.png}"/></a>
+            <a id="delete-handler" th:id="${accessory.codeStr}" th:name="${accessory.codeStr}" href="book.html">
+                <img alt="Delete" th:src="@{/images/blue_icons_24x24/trash.png}"/>
+            </a>
         </td>
     </tr>
     </tbody>
 </table>
 <div id="toolbar">
-    <a th:href="@{/}" href="../index.html"><img alt="Back" th:src="@{/images/blue_icons_24x24/up.png}"/></a>
-    <a th:href="@{/accessory/add}" href="accessory.html"><img alt="Add" th:src="@{/images/blue_icons_24x24/plus.png}"/></a>
-    <a th:href="@{/logout}"><img title="Escape" th:src="@{/images/blue_icons_24x24/escape.png}"/></a>
+    <a th:href="@{/}" href="../index.html">
+        <img alt="Back" th:src="@{/images/blue_icons_24x24/up.png}"/>
+    </a>
+    <a th:href="@{/accessory/add}" href="accessory.html">
+        <img alt="Add" th:src="@{/images/blue_icons_24x24/plus.png}"/>
+    </a>
+    <a th:href="@{/logout}">
+        <img title="Escape" th:src="@{/images/blue_icons_24x24/escape.png}"/>
+    </a>
 </div>
 </body>
 </html>

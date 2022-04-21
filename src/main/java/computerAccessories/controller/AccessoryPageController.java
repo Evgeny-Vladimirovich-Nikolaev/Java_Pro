@@ -37,13 +37,14 @@ public class AccessoryPageController {
         return "accessory/accessory";
     }
 
-    @PutMapping("/accessory/{edit}")
+    @GetMapping("/accessory/edit")
     public String currentAccessory(@RequestParam("code") String accessoryCode, Model model) {
         AccessoryDto currentAccessory = accessoryService.getByCode(accessoryCode)
                 .orElseThrow(() -> new IllegalArgumentException("Non existed accessory"));
         model.addAttribute("accessory", currentAccessory);
         return "accessory/accessory";
     }
+
 
     @PostMapping("/accessory/save")
     public String saveAccessory(AccessoryDto accessory) {

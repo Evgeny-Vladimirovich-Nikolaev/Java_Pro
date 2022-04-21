@@ -19,6 +19,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         return repository.findByLogin(login).map(UserPrincipal::new)
-                .orElseThrow(() -> new IllegalArgumentException("Has no user with login " + login));
+                .orElseThrow(() -> new IllegalArgumentException("Пользователь с логином " + login + " не найден"));
     }
 }
