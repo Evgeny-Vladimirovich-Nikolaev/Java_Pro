@@ -28,25 +28,25 @@ public class AccountController {
         return account;
     }
 
-    @GetMapping("/findById")
-    public Optional<Account> findById(@RequestParam Long id) {
+    @GetMapping("/accounts/{id}")
+    public Optional<Account> findById(@PathVariable Long id) {
         return operations.findByAccount(id);
     }
 
-    @GetMapping("/deposit")
-    public boolean deposit(@RequestParam Long id,
+    @PutMapping("/{id}/deposit")
+    public boolean deposit(@PathVariable Long id,
                         @RequestParam @NumberFormat(pattern = "###.###,##") BigDecimal transfer) {
         return operations.deposit(id, transfer);
     }
 
-    @GetMapping("/withdraw")
+    @PutMapping("/{id}/ithdraw")
     public boolean withdraw(@RequestParam long id,
                             @RequestParam @NumberFormat(pattern = "###.###,##")BigDecimal transfer) {
         return operations.withdraw(id, transfer);
     }
 
-    @GetMapping("/closeAccount")
-    public boolean closeAccount(@RequestParam Long id) {
+    @DeleteMapping("/id")
+    public boolean closeAccount(@PathVariable Long id) {
         return operations.closeAccount(id);
     }
 }

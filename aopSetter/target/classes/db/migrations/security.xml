@@ -1,0 +1,93 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="Create-table-role" author="Evgeny Nikolaev">
+        <preConditions>
+            <not>
+                <tableExists tableName="roles"/>
+            </not>
+        </preConditions>
+        <createTable tableName="roles">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Create-table-users" author="Evgeny Nikolaev">
+        <preConditions>
+            <not>
+                <tableExists tableName="users"/>
+            </not>
+        </preConditions>
+        <createTable tableName="users">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="login" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="status" type="INT" defaultValue="1">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Create-table-users_roles" author="Evgeny Nikolaev">
+        <preConditions>
+            <not>
+                <tableExists tableName="users_roles"/>
+            </not>
+        </preConditions>
+        <createTable tableName="users_roles">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="users_fk" references="users(id)" />
+            </column>
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="roles_fk" references="roles(id)" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Init-table-users" author="Evgeny Nikolaev">
+        <preConditions>
+            <tableIsEmpty tableName="users"/>
+        </preConditions>
+        <insert tableName="users">
+            <column name="login">admin</column>
+            <column name="status">1</column>
+            <column name="password">$2a$10$Ca7iacp2X0rCqsHecXuW8OzmSJDOJwYQ8zkmPma.b3qcOpJHjzToC</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="Init-table-roles" author="Evgeny Nikolaev">
+        <preConditions>
+            <tableIsEmpty tableName="roles"/>
+        </preConditions>
+        <insert tableName="roles">
+            <column name="name">admin</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="Init-table-users_roles" author="Evgeny Nikolaev">
+        <preConditions>
+            <tableIsEmpty tableName="users_roles"/>
+        </preConditions>
+        <insert tableName="users_roles">
+            <column name="user_id">1</column>
+            <column name="role_id">1</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

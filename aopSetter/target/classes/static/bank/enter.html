@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход в аккаунте</title>
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/enter.js"></script>
+    <!--    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>-->
+    <link rel="stylesheet" href="css/bank-style.css">
+</head>
+<body>
+<img src="../images/clipart/bank_with_mouse_360x252.jpg" alt="bank_with_mouse_360x252">
+<h1>Введите номер счета</h1>
+<div>
+    <input id="inputId" type="text" required="required"/>
+    <button id="buttonId">Продолжить</button>
+</div>
+</p>
+<span id="spanId">Номер счета</span>
+<span id="spanOwner">Владелец счета</span>
+<span id="spanBalance">Баланс</span>
+</p>
+<div>
+    <button disabled id="buttonDeposit">Положить деньги на счет</button>
+    <input disabled id="inputDeposit" type="text" required="required"/>
+</div>
+</p>
+<div>
+    <button disabled id="buttonWithdraw">Снять деньги со счета</button>
+    <input disabled id="inputWithdraw" type="text" required="required"/>
+</div>
+</p>
+<div>
+    <button disabled id="buttonClose">Закрыть счет</button>
+</div>
+</p>
+<div>
+    <button id="buttonCancel" onclick="window.location.href = 'start.html'">Вернуться</button>
+</div>
+</body>
+</html>

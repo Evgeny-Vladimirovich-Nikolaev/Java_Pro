@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add/Edit/View accessory</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css"/>
+</head>
+<body>
+<form id="add-form" th:action="@{/accessory/save}" th:if="${accessory == null}" method="post" action="accessory.html">
+    <p><strong>Add new accessory:</strong></p>
+
+    <div class="row">
+        <label for="code-input">Code:</label>
+        <input id="code-input" name="code" type="text" required="required" maxlength="7"/>
+    </div>
+
+    <div class="row">
+        <label for="name-input">Name:</label>
+        <input id="name-input" name="name" type="text" required="required" maxlength="120" />
+    </div>
+
+    <div class="row">
+        <a th:href="@{/accessories}" href="accessories.html"><img title="Back" th:src="@{/images/blue_icons_24x24/up.png}"/></a>
+        <button ><img title="Save" th:src="@{/images/blue_icons_24x24/save.png}"/></button>
+        <a th:href="@{/logout}"><img title="Escape" th:src="@{/images/blue_icons_24x24/escape.png}"/></a>
+    </div>
+</form>
+<form id="edit-form" th:action="@{/accessory/save(code=${accessory.code})}" th:unless="${accessory == null}" method="post"
+      action="accessory.html" th:object="${accessory}">
+    <p><strong>Accessory Info:</strong></p>
+
+    <div class="row">
+        <label for="code-input">Code:</label>
+        <input id="code-input" type="text" th:value="*{code}" readonly="readonly" value="1"/>
+    </div>
+
+    <div class="row">
+        <label for="name-input">Name:</label>
+        <input id="name-input" name="name" type="text" th:value="*{name}" required="required" maxlength="120" value="Art"/>
+    </div>
+
+    <div class="row">
+        <a th:href="@{/accessories}" href="accessories.html"><img title="Back" th:src="@{/images/blue_icons_24x24/up.png}"/></a>
+        <button type="submit"><img title="Save" th:src="@{/images/blue_icons_24x24/save.png}"/></button>
+    </div>
+</form>
+</body>
+</html>
+

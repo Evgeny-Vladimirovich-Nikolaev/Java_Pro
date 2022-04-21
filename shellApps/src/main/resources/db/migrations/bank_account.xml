@@ -1,0 +1,105 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="Create-table-bank_account" author="Evgeny Nikolaev">
+        <preConditions>
+            <not>
+                <tableExists tableName="bank_account"/>
+            </not>
+        </preConditions>
+        <createTable tableName="bank_account">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="owner" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="balance" type="DECIMAL">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="init-1" author="Evgeny Nikolaev">
+        <insert tableName="bank_account">
+            <column name="owner" value="Hylobate">
+            </column>
+            <column name="balance" value="10000">
+            </column>
+        </insert>
+    </changeSet>
+    <changeSet id="init-2" author="Evgeny Nikolaev">
+        <insert tableName="bank_account">
+            <column name="owner" value="Macaca">
+            </column>
+            <column name="balance" value="3000">
+            </column>
+        </insert>
+    </changeSet>
+    <changeSet id="init-3" author="Evgeny Nikolaev">
+        <insert tableName="bank_account">
+            <column name="owner" value="Papio">
+            </column>
+            <column name="balance" value="7000">
+            </column>
+        </insert>
+    </changeSet>
+    <changeSet id="init-4" author="Evgeny Nikolaev">
+        <insert tableName="bank_account">
+            <column name="owner" value="Pan">
+            </column>
+            <column name="balance" value="20000">
+            </column>
+        </insert>
+    </changeSet>
+    <changeSet id="init-5" author="Evgeny Nikolaev">
+        <insert tableName="bank_account">
+            <column name="owner" value="Cebuella">
+            </column>
+            <column name="balance" value="300">
+            </column>
+        </insert>
+    </changeSet>
+    <changeSet id="init-6" author="Evgeny Nikolaev">
+        <insert tableName="bank_account">
+            <column name="owner" value="Cercopithecus">
+            </column>
+            <column name="balance" value="12000">
+            </column>
+        </insert>
+    </changeSet>
+    <changeSet id="init-7" author="Evgeny Nikolaev">
+        <insert tableName="bank_account">
+            <column name="owner" value="Cebus">
+            </column>
+            <column name="balance" value="800">
+            </column>
+        </insert>
+    </changeSet>
+    <changeSet id="init-8" author="Evgeny Nikolaev">
+        <insert tableName="bank_account">
+            <column name="owner" value="Hylobate">
+            </column>
+            <column name="balance" value="10000">
+            </column>
+        </insert>
+    </changeSet>
+    <changeSet id="init-9" author="Evgeny Nikolaev">
+        <insert tableName="bank_account">
+            <column name="owner" value="Pan paniscus">
+            </column>
+            <column name="balance" value="18000">
+            </column>
+        </insert>
+    </changeSet>
+    <changeSet id="init-10" author="Evgeny Nikolaev">
+        <insert tableName="bank_account">
+            <column name="owner" value="Pongo">
+            </column>
+            <column name="balance" value="15000">
+            </column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Стартовая страница</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/computerAccessories.css"/>
+</head>
+<body>
+
+<p><strong>Стартовая страница</strong></p>
+</p>
+
+<menu>Доступные приложения
+    <ul>
+        <li><a th:href="@{/bank/start.html}" href="/start.html">Банковские услуги</a></li>
+    </ul>
+    <ul>
+        <li><a th:href="@{/accessories}" href="/accessories.html">Компьютерные комплектующие</a></li>
+    </ul>
+</menu>
+</p>
+<div class="row">
+    <a th:href="@{/logout}"><img title="Escape" th:src="@{/images/blue_icons_24x24/escape.png}"/></a>
+</div>
+
+</body>
+</html>
