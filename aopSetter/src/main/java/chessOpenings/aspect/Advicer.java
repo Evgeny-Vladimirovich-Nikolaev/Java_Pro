@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 @Aspect
 @Component
 @RequiredArgsConstructor
-public class RestTemplateAspect {
+public class Advicer {
 
     private final RestTemplate restTemplate;
 
@@ -29,10 +29,11 @@ public class RestTemplateAspect {
                 .host("localhost")
                 .port(8081)
                 .path("/logger")
+                .queryParam("target", joinPoint.getTarget())
                 .queryParam("method", joinPoint.getSignature().getName())
                 .queryParam("params", Stream.of(joinPoint.getArgs()).map(Object::toString).collect(Collectors.joining(", ")))
                 .build(Map.of());
-        log.info("Передаем информацию, вызывая {}", aspectUrl);
+        log.info("Вызывается аспект-логер по адресу {}", aspectUrl);
         restTemplate.getForEntity(aspectUrl, Void.class);
     }
 

@@ -1,4 +1,4 @@
-package lesson36.controller;
+package logger.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -11,10 +11,12 @@ import javax.validation.constraints.NotEmpty;
 @Slf4j
 @Validated
 @RestController
-public class AspectController {
+public class AspectLogger {
 
     @GetMapping("/logger")
-    public void aspect(@RequestParam @NotEmpty String method, @RequestParam String params) {
-        log.info("Был вызван метод {} с параметрами {}", method, params);
+    public void aspect(@RequestParam @NotEmpty String target,
+                       @RequestParam @NotEmpty String method,
+                       @RequestParam String params) {
+        log.info("Был вызван метод {} объекта {} с параметрами {}", method, target, params);
     }
 }

@@ -1,12 +1,12 @@
-package lesson36;
+package logger;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WebClientRunner {
+public class LoggerApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(WebClientRunner.class, args);
+        SpringApplication.run(LoggerApp.class, args);
     }
 }
