@@ -1,0 +1,71 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="Create-table-computer_accessories" author="Evgeny Nikolaev">
+        <preConditions>
+            <not>
+                <tableExists tableName="computer_accessories"/>
+            </not>
+        </preConditions>
+        <createTable tableName="computer_accessories">
+            <column name="code" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="init-1" author="Evgeny Nikolaev">
+        <insert tableName="computer_accessories">
+            <column name="code" value="CD-ROM">
+            </column>
+            <column name="name" value="Compact Disc Read-Only Memory">
+            </column>
+        </insert>
+    </changeSet>
+    <changeSet id="init-2" author="Evgeny Nikolaev">
+        <insert tableName="computer_accessories">
+            <column name="code" value="CPU">
+            </column>
+            <column name="name" value="Central processing unit">
+            </column>
+        </insert>
+    </changeSet>
+    <changeSet id="init-3" author="Evgeny Nikolaev">
+        <insert tableName="computer_accessories">
+            <column name="code" value="DDR">
+            </column>
+            <column name="name" value="Double Data Rate">
+            </column>
+        </insert>
+    </changeSet>
+    <changeSet id="init-4" author="Evgeny Nikolaev">
+        <insert tableName="computer_accessories">
+            <column name="code" value="DVD-ROM">
+            </column>
+            <column name="name" value="Digital Versatile Disc Read-Only Memory">
+            </column>
+        </insert>
+    </changeSet>
+    <changeSet id="init-5" author="Evgeny Nikolaev">
+        <insert tableName="computer_accessories">
+            <column name="code" value="GDDR">
+            </column>
+            <column name="name" value="Graphics DDR">
+            </column>
+        </insert>
+    </changeSet>
+    <changeSet id="init-6" author="Evgeny Nikolaev">
+        <insert tableName="computer_accessories">
+            <column name="code" value="HDD">
+            </column>
+            <column name="name" value="Hard disk drive">
+            </column>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
