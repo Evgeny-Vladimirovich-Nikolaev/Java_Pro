@@ -1,7 +1,7 @@
-package lesson40.service;
+package genresByMongo.service;
 
-import lesson40.dto.GenreDto;
-import lesson40.dto.GenrePageDto;
+import genresByMongo.dto.GenreDto;
+import genresByMongo.dto.GenrePageDto;
 import org.springframework.data.domain.Pageable;
 
 import javax.validation.Valid;

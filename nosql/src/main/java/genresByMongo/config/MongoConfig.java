@@ -1,4 +1,4 @@
-package lesson40.config;
+package genresByMongo.config;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;

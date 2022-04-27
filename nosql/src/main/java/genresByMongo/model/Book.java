@@ -1,4 +1,4 @@
-package lesson40.model;
+package genresByMongo.model;
 
 import io.github.kaiso.relmongo.annotation.OneToOne;
 import lombok.Data;

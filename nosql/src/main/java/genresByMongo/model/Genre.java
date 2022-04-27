@@ -1,4 +1,4 @@
-package lesson40.model;
+package genresByMongo.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

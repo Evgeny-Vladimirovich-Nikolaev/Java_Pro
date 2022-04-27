@@ -12,6 +12,7 @@
     <modules>
         <module>aop</module>
         <module>aopSetter</module>
+        <module>nosql</module>
     </modules>
 
 

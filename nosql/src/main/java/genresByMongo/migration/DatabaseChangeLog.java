@@ -1,11 +1,11 @@
-package lesson40.migration;
+package genresByMongo.migration;
 
 import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import lesson40.model.Genre;
-import lesson40.repository.GenreRepository;
+import genresByMongo.model.Genre;
+import genresByMongo.repository.GenreRepository;
 import org.bson.Document;
 
 @ChangeLog

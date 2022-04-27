@@ -1,12 +1,12 @@
-package lesson40.service.impl;
+package genresByMongo.service.impl;
 
-import lesson40.dto.BookDto;
-import lesson40.dto.BookPageDto;
-import lesson40.mapper.BookMapper;
-import lesson40.model.Book;
-import lesson40.repository.BookRepository;
-import lesson40.repository.GenreRepository;
-import lesson40.service.BookService;
+import genresByMongo.dto.BookDto;
+import genresByMongo.dto.BookPageDto;
+import genresByMongo.mapper.BookMapper;
+import genresByMongo.model.Book;
+import genresByMongo.repository.BookRepository;
+import genresByMongo.repository.GenreRepository;
+import genresByMongo.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.domain.Page;

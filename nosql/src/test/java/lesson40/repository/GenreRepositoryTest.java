@@ -1,6 +1,7 @@
 package lesson40.repository;
 
-import lesson40.model.Genre;
+import genresByMongo.model.Genre;
+import genresByMongo.repository.GenreRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

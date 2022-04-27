@@ -1,7 +1,7 @@
-package lesson40.mapper;
+package genresByMongo.mapper;
 
-import lesson40.dto.BookDto;
-import lesson40.model.Book;
+import genresByMongo.dto.BookDto;
+import genresByMongo.model.Book;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

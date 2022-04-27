@@ -1,10 +1,10 @@
-package lesson40;
+package genresByMongo;
 
 import com.github.cloudyrock.spring.v5.EnableMongock;
-import lesson40.dto.BookDto;
-import lesson40.dto.GenreDto;
-import lesson40.service.BookService;
-import lesson40.service.GenreService;
+import genresByMongo.dto.BookDto;
+import genresByMongo.dto.GenreDto;
+import genresByMongo.service.BookService;
+import genresByMongo.service.GenreService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;

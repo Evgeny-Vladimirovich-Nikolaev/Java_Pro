@@ -1,6 +1,6 @@
-package lesson40.repository;
+package genresByMongo.repository;
 
-import lesson40.model.Genre;
+import genresByMongo.model.Genre;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
