@@ -1,4 +1,4 @@
-package genresByMongo.model;
+package computerHardware.model;
 
 import io.github.kaiso.relmongo.annotation.OneToOne;
 import lombok.Data;
@@ -10,19 +10,19 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 @NoArgsConstructor
-@Document(collection = "book")
-public class Book {
+@Document(collection = "computerHardware")
+public class ComputerHardware {
 
     @Id
     private String id;
 
     @NotEmpty
-    private String isbn;
+    private String vendor;
 
     @NotEmpty
-    private String name;
+    private String model;
 
     @OneToOne
-    private Genre genre;
+    private HardwareType type;
 
 }

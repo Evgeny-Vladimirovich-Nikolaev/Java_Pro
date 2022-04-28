@@ -1,4 +1,4 @@
-package genresByMongo.dto;
+package computerHardware.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,8 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class GenrePageDto {
-    private List<GenreDto> data;
+public class HardwareTypePageDto {
+    private List<HardwareTypeDto> data;
     private int currentPage;
     private int totalPage;
     private boolean hasNext;

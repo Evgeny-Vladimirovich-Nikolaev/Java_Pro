@@ -1,11 +1,11 @@
-package genresByMongo.migration;
+package computerHardware.migration;
 
 import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import genresByMongo.model.Genre;
-import genresByMongo.repository.GenreRepository;
+import computerHardware.model.HardwareType;
+import computerHardware.repository.GenreRepository;
 import org.bson.Document;
 
 @ChangeLog
@@ -27,6 +27,6 @@ public class DatabaseChangeLog {
 
     @ChangeSet(order = "003", id = "insertNewGenreAnotherWay", author = "Vitalii Ivanov")
     public void insertPushkin(GenreRepository repository) {
-        repository.save(new Genre("new2", "Новый2"));
+        repository.save(new HardwareType("new2", "Новый2"));
     }
 }

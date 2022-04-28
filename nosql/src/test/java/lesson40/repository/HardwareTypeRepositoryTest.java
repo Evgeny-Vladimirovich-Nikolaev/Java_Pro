@@ -1,7 +1,7 @@
 package lesson40.repository;
 
-import genresByMongo.model.Genre;
-import genresByMongo.repository.GenreRepository;
+import computerHardware.model.HardwareType;
+import computerHardware.repository.GenreRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("DAO для работы с жанрами книг на основе Mongo JPA должен ")
 @DataMongoTest
-public class GenreRepositoryTest {
+public class HardwareTypeRepositoryTest {
 
     @Autowired
     private GenreRepository repository;
@@ -19,8 +19,8 @@ public class GenreRepositoryTest {
     @Test
     @DisplayName("уметь сохранять жанр и получать информацию по коду")
     public void shouldSaveAndFindByCode() {
-        Genre genre = repository.save(new Genre("Art", "Искусство"));
-        assertThat(genre.getCode()).isNotEmpty();
+        HardwareType hardwareType = repository.save(new HardwareType("Art", "Искусство"));
+        assertThat(hardwareType.getCode()).isNotEmpty();
         assertThat(repository.findById("Art")).isNotNull();
     }
 }

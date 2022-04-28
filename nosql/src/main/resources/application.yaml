@@ -2,13 +2,13 @@ spring:
   main:
     banner-mode: 'off'
   application:
-    name: library
+    name: ComputerHardware
   messages:
     basename: i18n.messages
   data:
     mongodb:
-      uri: mongodb://localhost:27017/library
-      database: library
+      uri: mongodb://localhost:27017/computerHardware
+      database: computerHardware
 application:
   nosql:
     type: mongo
@@ -17,4 +17,4 @@ mongock:
   runner-type: "ApplicationRunner" # default
   #runner-type: "InitializingBean"
   change-logs-scan-package:
-    - genresByMongo.migration
+    - computerHardware.migration

@@ -1,4 +1,4 @@
-package genresByMongo.model;
+package computerHardware.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,12 +11,12 @@ import javax.validation.constraints.NotEmpty;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "genre")
-public class Genre {
+@Document(collection = "hardwareType")
+public class HardwareType {
 
     @Id
     private String code;
 
     @NotEmpty
-    private String name;
+    private String description;
 }

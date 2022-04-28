@@ -1,4 +1,4 @@
-package genresByMongo.config;
+package computerHardware.config;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @Configuration
-@EnableMongoRepositories(basePackages = "genresByMongo.repository")
+@EnableMongoRepositories(basePackages = "computerHardware.repository")
 @ConditionalOnProperty(value = "application.nosql.type", havingValue = "mongo", matchIfMissing = true)
 public class MongoConfig extends AbstractMongoClientConfiguration {
 
