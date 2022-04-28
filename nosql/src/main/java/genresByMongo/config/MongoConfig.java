@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @Configuration
-@EnableMongoRepositories(basePackages = "lesson40.repository")
+@EnableMongoRepositories(basePackages = "genresByMongo.repository")
 @ConditionalOnProperty(value = "application.nosql.type", havingValue = "mongo", matchIfMissing = true)
 public class MongoConfig extends AbstractMongoClientConfiguration {
 

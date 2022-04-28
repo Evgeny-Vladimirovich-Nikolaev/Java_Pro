@@ -17,4 +17,4 @@ mongock:
   runner-type: "ApplicationRunner" # default
   #runner-type: "InitializingBean"
   change-logs-scan-package:
-    - lesson40.migration
+    - genresByMongo.migration
