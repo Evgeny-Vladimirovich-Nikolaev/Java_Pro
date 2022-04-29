@@ -13,7 +13,7 @@
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <lombok.version>1.18.22</lombok.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
-        <spring-data-keyvalue.version>2.6.3</spring-data-keyvalue.version>
+<!--        <spring-data-keyvalue.version>2.6.3</spring-data-keyvalue.version>-->
         <mapstruct.defaulComponentModel>spring</mapstruct.defaulComponentModel>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <relmongo.version>3.4.0</relmongo.version>

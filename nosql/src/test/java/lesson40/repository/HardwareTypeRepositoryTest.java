@@ -1,7 +1,7 @@
 package lesson40.repository;
 
 import computerHardware.model.HardwareType;
-import computerHardware.repository.GenreRepository;
+import computerHardware.repository.HardwareTypeRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class HardwareTypeRepositoryTest {
 
     @Autowired
-    private GenreRepository repository;
+    private HardwareTypeRepository repository;
 
     @Test
     @DisplayName("уметь сохранять жанр и получать информацию по коду")

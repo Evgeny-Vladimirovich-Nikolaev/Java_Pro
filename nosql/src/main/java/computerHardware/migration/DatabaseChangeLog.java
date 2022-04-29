@@ -5,7 +5,7 @@ import com.github.cloudyrock.mongock.ChangeSet;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import computerHardware.model.HardwareType;
-import computerHardware.repository.GenreRepository;
+import computerHardware.repository.HardwareTypeRepository;
 import org.bson.Document;
 
 @ChangeLog
@@ -26,7 +26,7 @@ public class DatabaseChangeLog {
     }
 
     @ChangeSet(order = "003", id = "insertNewGenreAnotherWay", author = "Vitalii Ivanov")
-    public void insertPushkin(GenreRepository repository) {
+    public void insertPushkin(HardwareTypeRepository repository) {
         repository.save(new HardwareType("new2", "Новый2"));
     }
 }

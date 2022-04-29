@@ -17,5 +17,5 @@ public class HardwareTypeDto {
 
     @NotNull
     @Size(min = 1, max = 120)
-    private String name;
+    private String description;
 }

@@ -15,10 +15,10 @@ public class ComputerHardwareDto {
     private String id;
     @NotEmpty
     @Size(min = 1, max = 120)
-    private String isbn;
+    private String vendor;
     @NotEmpty
     @Size(min = 1, max = 120)
-    private String name;
+    private String model;
 
-    private String genreCode;
+    private String type;
 }

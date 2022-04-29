@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.Optional;
 
-public interface GenreService {
+public interface HardwareTypeService {
     List<HardwareTypeDto> findAll();
     HardwareTypePageDto getPage(Pageable pageable);
     Optional<HardwareTypeDto> getByCode(@NotEmpty String genreCode);

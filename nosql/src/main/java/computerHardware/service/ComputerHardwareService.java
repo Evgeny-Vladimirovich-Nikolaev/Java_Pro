@@ -8,7 +8,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-public interface BookService {
+public interface ComputerHardwareService {
     List<ComputerHardwareDto> findAll();
     ComputerHardwarePageDto getPage(Pageable pageable);
     Optional<ComputerHardwareDto> getById(String bookId);

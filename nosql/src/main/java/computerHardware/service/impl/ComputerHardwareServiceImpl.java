@@ -4,9 +4,9 @@ import computerHardware.dto.ComputerHardwareDto;
 import computerHardware.dto.ComputerHardwarePageDto;
 import computerHardware.mapper.ComputerHardwareMapper;
 import computerHardware.model.ComputerHardware;
-import computerHardware.repository.BookRepository;
-import computerHardware.repository.GenreRepository;
-import computerHardware.service.BookService;
+import computerHardware.repository.ComputerHardwareRepository;
+import computerHardware.repository.HardwareTypeRepository;
+import computerHardware.service.ComputerHardwareService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.domain.Page;
@@ -21,22 +21,22 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @ConditionalOnProperty(value = "application.nosql.type", havingValue = "mongo", matchIfMissing = true)
-public class BookServiceImpl implements BookService {
+public class ComputerHardwareServiceImpl implements ComputerHardwareService {
 
-    private final BookRepository bookRepository;
-    private final GenreRepository genreRepository;
+    private final ComputerHardwareRepository computerHardwareRepository;
+    private final HardwareTypeRepository hardwareTypeRepository;
     private final ComputerHardwareMapper computerHardwareMapper;
 
     @Override
     @Transactional(readOnly = true)
     public List<ComputerHardwareDto> findAll() {
-        return computerHardwareMapper.toDtos(bookRepository.findAll());
+        return computerHardwareMapper.toDtos(computerHardwareRepository.findAll());
     }
 
     @Override
     @Transactional(readOnly = true)
     public ComputerHardwarePageDto getPage(Pageable pageable) {
-        Page<ComputerHardware> currentPage = bookRepository.findAll(pageable);
+        Page<ComputerHardware> currentPage = computerHardwareRepository.findAll(pageable);
         return new ComputerHardwarePageDto(computerHardwareMapper.toDtos(currentPage.getContent()),
                 currentPage.getNumber(),
                 currentPage.getTotalPages(),
@@ -47,36 +47,36 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional(readOnly = true)
     public Optional<ComputerHardwareDto> getById(String bookId) {
-        return computerHardwareMapper.toOptionalDto(bookRepository.findById(bookId));
+        return computerHardwareMapper.toOptionalDto(computerHardwareRepository.findById(bookId));
     }
 
     @Override
     @Transactional
     public ComputerHardwareDto save(@Valid ComputerHardwareDto book) {
         ComputerHardware computerHardwareEntity = computerHardwareMapper.toEntity(book);
-        genreRepository.findById(book.getGenreCode()).ifPresent(computerHardwareEntity::setGenre);
-        return computerHardwareMapper.toDto(bookRepository.save(computerHardwareEntity));
+        hardwareTypeRepository.findById(book.getGenreCode()).ifPresent(computerHardwareEntity::setGenre);
+        return computerHardwareMapper.toDto(computerHardwareRepository.save(computerHardwareEntity));
     }
 
     @Override
     @Transactional
     public void partialSave(@Valid ComputerHardwareDto book) {
-        bookRepository.findById(book.getId()).ifPresent(computerHardwareEntity -> {
+        computerHardwareRepository.findById(book.getId()).ifPresent(computerHardwareEntity -> {
             computerHardwareEntity.setIsbn(book.getIsbn());
             computerHardwareEntity.setName(book.getName());
-            bookRepository.save(computerHardwareEntity);
+            computerHardwareRepository.save(computerHardwareEntity);
         });
     }
 
     @Override
     @Transactional
     public void deleteById(String bookId) {
-        bookRepository.deleteById(bookId);
+        computerHardwareRepository.deleteById(bookId);
     }
 
     @Override
     @Transactional
     public void delete(@Valid ComputerHardwareDto book) {
-        bookRepository.delete(computerHardwareMapper.toEntity(book));
+        computerHardwareRepository.delete(computerHardwareMapper.toEntity(book));
     }
 }
