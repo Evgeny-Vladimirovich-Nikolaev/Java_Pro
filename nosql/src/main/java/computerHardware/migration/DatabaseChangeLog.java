@@ -34,4 +34,20 @@ public class DatabaseChangeLog {
     public void insertHDD(HardwareTypeRepository repository) {
         repository.save(new HardwareType("HDD", "Hard disk drive"));
     }
+
+    @ChangeSet(order = "005", id = "insertSSD", author = "Evgeny Nikolaev")
+    public void insertSSD(HardwareTypeRepository repository) {
+        repository.save(new HardwareType("SSD", "Solid-State Drive"));
+    }
+
+    @ChangeSet(order = "006", id = "insertCD", author = "Evgeny Nikolaev")
+    public void insertCD(HardwareTypeRepository repository) {
+        repository.save(new HardwareType("CD-ROM", "Compact Disc Read-Only Memory"));
+    }
+
+    @ChangeSet(order = "007", id = "insertDVD", author = "Evgeny Nikolaev")
+    public void insertDVD(HardwareTypeRepository repository) {
+        repository.save(new HardwareType("DVD-ROM", "Digital Versatile Disc Read-Only Memory"));
+    }
+
 }
