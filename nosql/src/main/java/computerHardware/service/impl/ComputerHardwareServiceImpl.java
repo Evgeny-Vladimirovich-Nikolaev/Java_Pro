@@ -53,18 +53,18 @@ public class ComputerHardwareServiceImpl implements ComputerHardwareService {
     @Override
     @Transactional
     public ComputerHardwareDto save(@Valid ComputerHardwareDto dto) {
-        ComputerHardware computerHardwareEntity = computerHardwareMapper.toEntity(dto);
-        hardwareTypeRepository.findById(dto.getType()).ifPresent(computerHardwareEntity::setType);
-        return computerHardwareMapper.toDto(computerHardwareRepository.save(computerHardwareEntity));
+        ComputerHardware entity = computerHardwareMapper.toEntity(dto);
+        hardwareTypeRepository.findById(dto.getType()).ifPresent(entity::setHardwareType);
+        return computerHardwareMapper.toDto(computerHardwareRepository.save(entity));
     }
 
     @Override
     @Transactional
     public void partialSave(@Valid ComputerHardwareDto dto) {
-        computerHardwareRepository.findById(dto.getId()).ifPresent(computerHardwareEntity -> {
-            computerHardwareEntity.setVendor(dto.getVendor());
-            computerHardwareEntity.setModel(dto.getModel());
-            computerHardwareRepository.save(computerHardwareEntity);
+        computerHardwareRepository.findById(dto.getId()).ifPresent(entity -> {
+            entity.setVendor(dto.getVendor());
+            entity.setModel(dto.getModel());
+            computerHardwareRepository.save(entity);
         });
     }
 

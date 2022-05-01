@@ -1,10 +1,10 @@
 package computerHardware;
 
-import com.github.cloudyrock.spring.v5.EnableMongock;
 import computerHardware.dto.ComputerHardwareDto;
 import computerHardware.dto.HardwareTypeDto;
 import computerHardware.service.ComputerHardwareService;
 import computerHardware.service.HardwareTypeService;
+import io.mongock.runner.springboot.EnableMongock;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -19,11 +19,11 @@ public class MongoRunner {
         final ConfigurableApplicationContext applicationContext =
                 SpringApplication.run(MongoRunner.class, args);
         final HardwareTypeService hardwareTypeService = applicationContext.getBean(HardwareTypeService.class);
-//        hardwareTypeService.save(new HardwareTypeDto("det", "Детективы"));
-//        hardwareTypeService.save(new HardwareTypeDto("tri", "Триллеры"));
-        final HardwareTypeDto roman = new HardwareTypeDto("rom", "Романы");
-//        hardwareTypeService.save(roman);
-        final ComputerHardwareService computerHardwareService = applicationContext.getBean(ComputerHardwareService.class);
-//        computerHardwareService.save(new ComputerHardwareDto(UUID.randomUUID().toString(), "978-5-17-087888-8", "Анна Каренина", roman.getCode()));
+        hardwareTypeService.save(new HardwareTypeDto("KB", "Keyboard"));
+        hardwareTypeService.save(new HardwareTypeDto("Ms", "Mouse"));
+        final HardwareTypeDto monitor = new HardwareTypeDto("Mon", "Monitor");
+        hardwareTypeService.save(monitor);
+       final ComputerHardwareService computerHardwareService = applicationContext.getBean(ComputerHardwareService.class);
+        computerHardwareService.save(new ComputerHardwareDto(UUID.randomUUID().toString(), "Philips", "Philips 279P1", monitor.getCode()));
     }
 }

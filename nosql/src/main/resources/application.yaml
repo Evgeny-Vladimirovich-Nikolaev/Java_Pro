@@ -16,5 +16,5 @@ application:
 mongock:
   runner-type: "ApplicationRunner" # default
   #runner-type: "InitializingBean"
-  change-logs-scan-package:
+  migrationScanPackage:
     - computerHardware.migration
