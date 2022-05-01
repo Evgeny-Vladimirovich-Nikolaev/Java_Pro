@@ -45,25 +45,25 @@ public class HardwareTypeServiceImpl implements HardwareTypeService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<HardwareTypeDto> getByCode(@NotEmpty String genreCode) {
-        return hardwareTypeMapper.toOptionalDto(hardwareTypeRepository.findById(genreCode));
+    public Optional<HardwareTypeDto> getByCode(@NotEmpty String code) {
+        return hardwareTypeMapper.toOptionalDto(hardwareTypeRepository.findById(code));
     }
 
     @Override
     @Transactional
-    public HardwareTypeDto save(@Valid HardwareTypeDto genre) {
-        return hardwareTypeMapper.toDto(hardwareTypeRepository.save(hardwareTypeMapper.toEntity(genre)));
+    public HardwareTypeDto save(@Valid HardwareTypeDto type) {
+        return hardwareTypeMapper.toDto(hardwareTypeRepository.save(hardwareTypeMapper.toEntity(type)));
     }
 
     @Override
     @Transactional
-    public void deleteByCode(@NotEmpty String genreCode) {
-        hardwareTypeRepository.deleteById(genreCode);
+    public void deleteByCode(@NotEmpty String code) {
+        hardwareTypeRepository.deleteById(code);
     }
 
     @Override
     @Transactional
-    public void delete(@Valid HardwareTypeDto genre) {
-        hardwareTypeRepository.delete(hardwareTypeMapper.toEntity(genre));
+    public void delete(@Valid HardwareTypeDto type) {
+        hardwareTypeRepository.delete(hardwareTypeMapper.toEntity(type));
     }
 }

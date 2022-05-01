@@ -11,9 +11,9 @@ import java.util.Optional;
 public interface ComputerHardwareService {
     List<ComputerHardwareDto> findAll();
     ComputerHardwarePageDto getPage(Pageable pageable);
-    Optional<ComputerHardwareDto> getById(String bookId);
-    ComputerHardwareDto save(@Valid ComputerHardwareDto book);
-    void partialSave(@Valid ComputerHardwareDto book);
-    void deleteById(String bookId);
-    void delete(@Valid ComputerHardwareDto book);
+    Optional<ComputerHardwareDto> getById(String id);
+    ComputerHardwareDto save(@Valid ComputerHardwareDto dto);
+    void partialSave(@Valid ComputerHardwareDto dto);
+    void deleteById(String id);
+    void delete(@Valid ComputerHardwareDto dto);
 }

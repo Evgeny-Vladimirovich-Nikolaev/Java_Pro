@@ -12,8 +12,8 @@ import java.util.Optional;
 public interface HardwareTypeService {
     List<HardwareTypeDto> findAll();
     HardwareTypePageDto getPage(Pageable pageable);
-    Optional<HardwareTypeDto> getByCode(@NotEmpty String genreCode);
-    HardwareTypeDto save(@Valid HardwareTypeDto genre);
-    void deleteByCode(@NotEmpty String genreCode);
-    void delete(@Valid HardwareTypeDto genre);
+    Optional<HardwareTypeDto> getByCode(@NotEmpty String code);
+    HardwareTypeDto save(@Valid HardwareTypeDto type);
+    void deleteByCode(@NotEmpty String code);
+    void delete(@Valid HardwareTypeDto type);
 }

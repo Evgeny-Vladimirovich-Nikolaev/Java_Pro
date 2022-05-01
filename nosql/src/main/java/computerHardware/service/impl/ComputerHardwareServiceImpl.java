@@ -46,37 +46,37 @@ public class ComputerHardwareServiceImpl implements ComputerHardwareService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<ComputerHardwareDto> getById(String bookId) {
-        return computerHardwareMapper.toOptionalDto(computerHardwareRepository.findById(bookId));
+    public Optional<ComputerHardwareDto> getById(String id) {
+        return computerHardwareMapper.toOptionalDto(computerHardwareRepository.findById(id));
     }
 
     @Override
     @Transactional
-    public ComputerHardwareDto save(@Valid ComputerHardwareDto book) {
-        ComputerHardware computerHardwareEntity = computerHardwareMapper.toEntity(book);
-        hardwareTypeRepository.findById(book.getGenreCode()).ifPresent(computerHardwareEntity::setGenre);
+    public ComputerHardwareDto save(@Valid ComputerHardwareDto dto) {
+        ComputerHardware computerHardwareEntity = computerHardwareMapper.toEntity(dto);
+        hardwareTypeRepository.findById(dto.getType()).ifPresent(computerHardwareEntity::setType);
         return computerHardwareMapper.toDto(computerHardwareRepository.save(computerHardwareEntity));
     }
 
     @Override
     @Transactional
-    public void partialSave(@Valid ComputerHardwareDto book) {
-        computerHardwareRepository.findById(book.getId()).ifPresent(computerHardwareEntity -> {
-            computerHardwareEntity.setIsbn(book.getIsbn());
-            computerHardwareEntity.setName(book.getName());
+    public void partialSave(@Valid ComputerHardwareDto dto) {
+        computerHardwareRepository.findById(dto.getId()).ifPresent(computerHardwareEntity -> {
+            computerHardwareEntity.setVendor(dto.getVendor());
+            computerHardwareEntity.setModel(dto.getModel());
             computerHardwareRepository.save(computerHardwareEntity);
         });
     }
 
     @Override
     @Transactional
-    public void deleteById(String bookId) {
-        computerHardwareRepository.deleteById(bookId);
+    public void deleteById(String id) {
+        computerHardwareRepository.deleteById(id);
     }
 
     @Override
     @Transactional
-    public void delete(@Valid ComputerHardwareDto book) {
-        computerHardwareRepository.delete(computerHardwareMapper.toEntity(book));
+    public void delete(@Valid ComputerHardwareDto dto) {
+        computerHardwareRepository.delete(computerHardwareMapper.toEntity(dto));
     }
 }
