@@ -2,10 +2,10 @@ spring:
   main:
     banner-mode: 'off'
   application:
-    name: library
+    name: computerHardware
   data:
     mongodb:
-      database: library
+      database: computerHardware
       port: 27017
       host: localhost
 #      uri: mongodb://localhost:27017/library?replicaSet=test&connectTimeoutMS=120000
@@ -17,8 +17,4 @@ application:
 server:
   port: 9090
 
-mongock:
-  runner-type: "ApplicationRunner" # default
-  #runner-type: "InitializingBean"
-  change-logs-scan-package:
-    - lesson41.migration
+
