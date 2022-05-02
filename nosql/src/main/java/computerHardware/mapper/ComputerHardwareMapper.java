@@ -28,11 +28,6 @@ public interface ComputerHardwareMapper {
             @Mapping(target = "model", source = "computerHardware.model")
     })
     ComputerHardware toEntity(ComputerHardwareDto computerHardware);
-//
-//    default HardwareType map(String value) {
-//        //TODO
-//        return null;
-//    }
 
     default List<ComputerHardwareDto> toDtos(List<ComputerHardware> entities) {
         return entities.stream().map(this::toDto).collect(Collectors.toList());

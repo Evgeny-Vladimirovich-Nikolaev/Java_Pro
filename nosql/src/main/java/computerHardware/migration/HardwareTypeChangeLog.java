@@ -1,23 +1,17 @@
 package computerHardware.migration;
 
-import com.github.cloudyrock.mongock.ChangeSet;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import computerHardware.model.HardwareType;
-import computerHardware.repository.HardwareTypeRepository;
 import io.mongock.api.annotations.*;
 import lombok.RequiredArgsConstructor;
-import org.bson.Document;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-//@ChangeLog
-@ChangeUnit(id="HardwareTypeChangeSet", order = "1", author = "Evgeny Nikolaev", systemVersion = "1")
+@ChangeUnit(id="HardwareTypeChangeLog", order = "1", author = "Evgeny Nikolaev", systemVersion = "1")
 @RequiredArgsConstructor
-public class HardwareTypeChangeSet {
+public class HardwareTypeChangeLog {
 
     private final MongoTemplate template;
     private Set<HardwareType> dataSet = new HashSet<>();
@@ -41,6 +35,7 @@ public class HardwareTypeChangeSet {
         );
     }
 
+    //When ChangeUnit provides BeforeExecution method, it must provide one(and only one) RollbackBeforeExecution method
     @RollbackBeforeExecution
     public void rollbackBeforeExecution() {
         template.dropCollection("hardwareType");
@@ -51,9 +46,10 @@ public class HardwareTypeChangeSet {
         dataSet.forEach(hardware -> template.save(hardware, "hardwareType"));
     }
 
+    //ChangeUnit must have only one RollbackExecution method
     @RollbackExecution
     public void rollback() {
-        //template.dropCollection("hardwareType");
+        //TODO
     }
 
 }

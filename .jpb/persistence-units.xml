@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <computerHardware name="PersistenceUnitSettings">
+  <component name="PersistenceUnitSettings">
     <persistence-units>
-      <persistence-unit name="Default" defaultSearchScope="Project">
+      <persistence-unit name="Default">
         <packages>
-          <package value="" />
+          <package value="logger" />
         </packages>
       </persistence-unit>
     </persistence-units>
-  </computerHardware>
+  </component>
 </project>

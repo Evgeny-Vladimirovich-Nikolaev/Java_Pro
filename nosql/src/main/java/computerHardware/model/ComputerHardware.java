@@ -1,5 +1,6 @@
 package computerHardware.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Document(collection = "computerHardware")
 public class ComputerHardware {
 
@@ -22,7 +24,6 @@ public class ComputerHardware {
     @NotEmpty
     private String model;
 
-    //@OneToOne
     @DBRef
     private HardwareType hardwareType;
 
