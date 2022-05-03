@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all types</title>
+    <link rel="stylesheet" th:href="@{/css/computerAccessories.css}" href="styles/library.css">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css" />
+    <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}" src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            fillData();
+        });
+
+        function fillData(page) {
+            $.get('/api/types' + (page ? '?page=' + page : ''), function (result) {
+                let rowsData = '';
+                for (let i = 0; i < result.length; i++) {
+                    let type = result[i];
+                    rowsData += '<tr><td>' + type.code + '</td>' +
+                        '<td>' + type.description + '</td>' +
+                        '<td><a href="/type/edit?code=' + type.code + '"><img title="Edit" src="/images/blue_icons_24x24/edit.png"/></a>' +
+                        '<a data-id="type_' + type.code + '" href="type.html"><img title="Delete" src="/images/blue_icons_24x24/trash.png"/></a>' +
+                        '</td></tr>';
+                }
+                let typeDataElement = $('#typeData');
+                typeDataElement.html(rowsData);
+                $('a[data-id^=type_]').one('click', function (event) {
+                    let typeCode = $(this).attr('data-id').replace('type_', '');
+                    if (confirm('Are you sure to delete element "' + typeCode + '"?')) {
+                        $.ajax({
+                            url: '/api/types/' + typeCode,
+                            type: 'DELETE',
+                            success: function () {
+                                location.href = '/types';
+                            }
+                        });
+                    }
+                    event.preventDefault();
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+<p><strong>Types:</strong></p>
+
+<table class="types">
+    <thead>
+    <tr>
+        <th>Code</th>
+        <th>Description</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody id="typeData"/>
+</table>
+<div id="toolbar">
+    <a th:href="@{/}" href="../index.html"><img title="Back" th:src="@{/images/blue_icons_24x24/left.png}"/></a>
+    <a th:href="@{/type/add}" href="type.html"><img title="Add" th:src="@{/images/blue_icons_24x24/plus.png}"/></a>
+</div>
+</body>
+</html>

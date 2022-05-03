@@ -1,5 +1,0 @@
-GET http://localhost:8080/bank/deposit?id=4&transfer=1000
-//GET http://localhost:8080/bank/withdraw?id=1&transfer=1
-//GET http://localhost:8080/bank/closeAccount?id=2
-//GET http://localhost:8080/bank/findById?id=1
-//GET http://localhost:8080/bank/changeName?id=5

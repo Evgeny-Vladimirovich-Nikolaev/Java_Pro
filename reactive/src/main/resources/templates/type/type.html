@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add/Edit/View type</title>
+    <link rel="stylesheet" th:href="@{/styles/library.css}" href="/styles/library.css"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css" />
+</head>
+<body>
+<form id="add-form" th:action="@{/type/save}" th:if="${type == null}" method="post" action="type.html">
+    <p><strong>Add new type:</strong></p>
+
+    <div class="row">
+        <label for="code-input">Code:</label>
+        <input id="code-input" name="code" type="text" required="required" maxlength="7"/>
+    </div>
+
+    <div class="row">
+        <label for="description-input">Description:</label>
+        <input id="description-input" name="description" type="text" required="required" maxlength="120" />
+    </div>
+
+    <div class="row">
+        <a th:href="@{/types}" href="types.html"><img title="Back" th:src="@{/images/blue_icons_24x24/left.png}"/></a>
+        <button type="submit"><img title="Save" th:src="@{/images/blue_icons_24x24/save.png}"/></button>
+    </div>
+</form>
+<form id="edit-form" th:action="@{/type/save(code=${type.code})}" th:unless="${type == null}" method="post"
+      action="type.html" th:object="${type}">
+    <p><strong>Type Info:</strong></p>
+
+    <div class="row">
+        <label for="code-input">Code:</label>
+        <input id="code-input" type="text" th:value="${type.code}" readonly="readonly" value="1"/>
+    </div>
+
+    <div class="row">
+        <label for="description-input">Description:</label>
+        <input id="description-input" name="description" type="text" th:value="${type.description}" required="required" maxlength="120" value="Art"/>
+    </div>
+
+    <div class="row">
+        <a th:href="@{/types}" href="types.html"><img title="Back" th:src="@{/images/blue_icons_24x24/left.png}"/></a>
+        <button type="submit"><img title="Save" th:src="@{/images/blue_icons_24x24/save.png}"/></button>
+    </div>
+</form>
+</body>
+</html>
