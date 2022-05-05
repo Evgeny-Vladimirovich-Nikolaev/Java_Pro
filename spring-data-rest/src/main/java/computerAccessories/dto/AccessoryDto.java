@@ -15,7 +15,4 @@ public class AccessoryDto {
     @Size(min = 1, max = 120)
     private String name;
 
-    public String getCodeStr() {
-        return String.format("accessory_%s", code);
-    }
 }

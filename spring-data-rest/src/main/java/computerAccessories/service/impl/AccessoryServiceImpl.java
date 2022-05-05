@@ -7,7 +7,6 @@ import computerAccessories.model.Accessory;
 import computerAccessories.repository.AccessoryRepository;
 import computerAccessories.service.AccessoryService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Slf4j
 @RequiredArgsConstructor
 public class AccessoryServiceImpl implements AccessoryService {
 
@@ -56,8 +54,13 @@ public class AccessoryServiceImpl implements AccessoryService {
     @Override
     @Transactional
     public void deleteByCode(@NotEmpty String accessoryCode) {
-        log.info("Удаляется элемент с кодом {}", accessoryCode);
         accessoryRepository.deleteById(accessoryCode);
+    }
+
+    @Override
+    @Transactional
+    public void delete(@Valid Accessory accessory) {
+        accessoryRepository.delete(accessory);
     }
 }
 

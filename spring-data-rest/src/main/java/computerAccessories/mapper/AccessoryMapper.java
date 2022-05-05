@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 
-@Mapper(componentModel = "spring")
+@Mapper
 public interface AccessoryMapper {
 
     @Mapping(target = "code", source = "entity.code")

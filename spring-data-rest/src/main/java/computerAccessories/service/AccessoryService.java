@@ -2,6 +2,7 @@ package computerAccessories.service;
 
 import computerAccessories.dto.AccessoryDto;
 import computerAccessories.dto.AccessoryPageDto;
+import computerAccessories.model.Accessory;
 import org.springframework.data.domain.Pageable;
 
 import javax.validation.Valid;
@@ -15,4 +16,5 @@ public interface AccessoryService {
     Optional<AccessoryDto> getByCode(@NotEmpty String accessoryCode);
     AccessoryDto save(@Valid AccessoryDto accessory);
     void deleteByCode(@NotEmpty String accessoryCode);
+    void delete(Accessory accessory);
 }
