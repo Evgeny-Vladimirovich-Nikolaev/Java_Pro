@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Computer accessories</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="css/style.css">
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $("a[id^='accessory']").click(function (event) {
+                if (confirm('Are you sure to delete this item?')) {
+                    let accessoryCode = $(this).attr('name').replace('accessory_', '');
+                    $.ajax({
+                        url: '/accessories/' + accessoryCode + '/',
+                        type: 'DELETE',
+                        success: function (result) {
+                            if (result.success) {
+                                location.href = '/accessories';
+                            }
+                        }
+                    });
+                }
+                event.preventDefault();
+            });
+        });
+    </script>
+</head>
+<body>
+<p><strong>Computer accessories</strong></p>
+</p>
+<div id="navigation">
+    <a th:if="${accessories.hasPrevious}" th:href="@{/accessories(page=${accessories.currentPage-1})}" href="accessories.html"><img
+            alt="Previous page" th:src="@{/images/blue_icons_24x24/left.png}"/></a>
+    Current page <span th:text="${accessories.currentPage + 1}">0</span> of <span th:text="${accessories.totalPage}">2</span>
+    <a th:if="${accessories.hasNext}" th:href="@{/accessories(page=${accessories.currentPage + 1})}" href="accessories.html"><img
+            alt="Next page" th:src="@{/images/blue_icons_24x24/right.png}"/></a>
+</div>
+</p>
+<table class="accessories">
+    <thead>
+    <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="accessory: ${accessories.data}">
+        <td th:text="${accessory.code}">art</td>
+        <td th:text="${accessory.name}">Art</td>
+        <td>
+            <a th:href="@{/accessory/edit(code=${accessory.code})}" href="accessory.html"><img alt="Edit"
+                                                                                               th:src="@{/images/blue_icons_24x24/edit.png}"/></a>
+            <a id="delete-handler" th:id="${accessory.codeStr}" th:name="${accessory.codeStr}" href="computerHardware.html">
+                <img alt="Delete" th:src="@{/images/blue_icons_24x24/trash.png}"/>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div id="toolbar">
+    <a th:href="@{/}" href="../index.html">
+        <img alt="Back" th:src="@{/images/blue_icons_24x24/up.png}"/>
+    </a>
+    <a th:href="@{/accessory/add}" href="accessory.html">
+        <img alt="Add" th:src="@{/images/blue_icons_24x24/plus.png}"/>
+    </a>
+    <a th:href="@{/logout}">
+        <img title="Escape" th:src="@{/images/blue_icons_24x24/escape.png}"/>
+    </a>
+</div>
+</body>
+</html>
