@@ -14,6 +14,7 @@
         <module>aopSetter</module>
         <module>nosql</module>
         <module>reactive</module>
+        <module>spring-data-rest</module>
 
     </modules>
 
