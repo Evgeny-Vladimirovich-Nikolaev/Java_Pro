@@ -15,6 +15,7 @@
         <module>nosql</module>
         <module>reactive</module>
         <module>spring-data-rest</module>
+        <module>consoleApps</module>
 
     </modules>
 
