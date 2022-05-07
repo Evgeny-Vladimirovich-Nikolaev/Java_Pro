@@ -17,8 +17,8 @@
                     let accessory = result._embedded.accessories[i];
                     var actionButton =
                         '<td>' +
-                        '<a href="/accessory/edit?code=' + accessory.code + '"><img title="Edit" src="/images/edit.png"/></a>' +
-                        '<a data-id="accessory_' + accessory.code + '" href="accessory.html"><img title="Delete" src="/images/delete.png"/></a>' +
+                        '<a href="/accessory/edit?code=' + accessory.code + '"><img title="Edit" src="/images/blue_icons_24x24/edit.png"/></a>' +
+                        '<a data-id="accessory_' + accessory.code + '" href="accessory.html"><img title="Delete" src="/images/blue_icons_24x24/trash.png"/></a>' +
                         '</td>';
 
                     rowsData += '<tr><td>' + accessory.code + '</td>' +
@@ -30,8 +30,8 @@
                 accessoryDataElement.html(rowsData);
 
                 $('a[data-id^=accessory_]').one('click', function (event) {
-                    if (confirm('Are you sure to delete this accessory?')) {
-                        let accessoryCode = $(this).attr('data-id').replace('accessory_', '');
+                    let accessoryCode = $(this).attr('data-id').replace('accessory_', '');
+                    if (confirm('Are you sure to delete item "' + accessoryCode + '"?')) {
                         $.ajax({
                             url: '/api/accessories/' + accessoryCode,
                             type: 'DELETE',
@@ -39,24 +39,12 @@
                                 location.href = '/accessories';
                             },
                             error: function (jqXHR, exception) {
-                                if (jqXHR.status === 403) {
-                                    alert('You have no right');
-                                }
+                                alert('Could not delete "' + accessoryCode + '"');
                             }
                         });
                     }
                     event.preventDefault();
                 });
-
-
-                $('#navigation').html(
-                    (result.hasPrevious ? ('<a href="javascript:fillData(' + (result.currentPage - 1) + ')">' +
-                        '<img title="Previous page" src="/images/previous.png"/>' +
-                        '</a>') : '') +
-                    'Current page <span>' + (result.page.number + 1) + '</span> of <span>' + result.page.totalPages + '</span>' +
-                    (result.hasNext ? ('<a href="javascript:fillData(' + (result.currentPage + 1) + ')">' +
-                        '<img title="Next page" src="/images/next.png"/>' +
-                        '</a>') : ''));
             });
         }
     </script>
@@ -69,15 +57,15 @@
     <thead>
     <tr>
         <th>Code</th>
-        <th>Name</th>
+        <th>Description</th>
         <th>Actions</th>
     </tr>
     </thead>
     <tbody id="accessoryData"/>
 </table>
 <div id="toolbar">
-    <a th:href="@{/}" href="../index.html"><img title="Back" th:src="@{/images/back.png}"/></a>
-    <a th:href="@{/accessory/add}" href="accessory.html"><img title="Add" th:src="@{/images/add.png}"/></a>
+    <a th:href="@{/}" href="../index.html"><img title="Back" th:src="@{/images/blue_icons_24x24/up.png}"/></a>
+    <a th:href="@{/accessory/add}" href="accessory.html"><img title="Add" th:src="@{/images/blue_icons_24x24/plus.png}"/></a>
 </div>
 </body>
 </html>

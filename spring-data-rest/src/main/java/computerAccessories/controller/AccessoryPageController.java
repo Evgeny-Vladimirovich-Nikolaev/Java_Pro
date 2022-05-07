@@ -29,7 +29,7 @@ public class AccessoryPageController {
     public String currentAccessory(@RequestParam("code") String code, Model model) {
         AccessoryDto dto = accessoryService.getByCode(code)
                 .orElseThrow(() -> new IllegalArgumentException("Non existed accessory"));
-        model.addAttribute("computer_accessories", dto);
+        model.addAttribute("accessory", dto);
         return "accessory/accessory";
     }
 
