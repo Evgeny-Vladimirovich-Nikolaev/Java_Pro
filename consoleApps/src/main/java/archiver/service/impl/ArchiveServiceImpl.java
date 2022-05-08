@@ -34,11 +34,8 @@ public class ArchiveServiceImpl implements ArchiveService {
     }
 
     @Override
-    public Optional<String> unzip(String source, String password) {
+    public Optional<String> unzip(String source) {
         final ZipFile zipFile = new ZipFile(source);
-        if (StringUtils.isNotBlank(password)) {
-            zipFile.setPassword(password.toCharArray());
-        }
         final String parent = new File(source).getParent();
         try {
             zipFile.extractAll(parent);

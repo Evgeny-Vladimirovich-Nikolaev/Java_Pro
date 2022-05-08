@@ -8,5 +8,5 @@ public interface ArchiveService {
 
     Optional<String> zip(String source);
 
-    Optional<String> unzip(String source, @Nullable String password);
+    Optional<String> unzip(String source);
 }
