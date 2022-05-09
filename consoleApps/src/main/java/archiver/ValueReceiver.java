@@ -2,19 +2,22 @@ package archiver;
 
 
 
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+@Component
 public class ValueReceiver {
 
-    private static final String ERROR ="Неизвестная ошибка";
-    private static final String IO_ERROR = "Ошибка ввода/вывода";
-    private static final String INVALID_VALUE = "%s не является допустимым значением";
-    private static final BufferedReader inputReader = new BufferedReader
+    private final String ERROR ="Неизвестная ошибка";
+    private final String IO_ERROR = "Ошибка ввода/вывода";
+    private final String INVALID_VALUE = "%s не является допустимым значением";
+    private final BufferedReader inputReader = new BufferedReader
             (new InputStreamReader(System.in));
 
-    public static String receiveString(String conditions) {
+    public String receiveString(String conditions) {
         String temp = "";
         while (temp.length() == 0) {
             System.out.println(conditions);
@@ -30,7 +33,7 @@ public class ValueReceiver {
         }
         return temp;
     }
-    public static int receiveInt(String conditions) {
+    public int receiveInt(String conditions) {
         String temp = "";
         int value = 0;
         while (true) {
@@ -53,7 +56,7 @@ public class ValueReceiver {
         return value;
     }
 
-    public static void closeReader() {
+    public void closeReader() {
         try {
             inputReader.close();
         } catch (IOException e) {
